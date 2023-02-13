@@ -1,0 +1,129 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Variables */
+:root {
+    --header-height: 66px;
+    --text-color: #333;
+    --primary-color: #00a2e8;
+    --sidebar-width: 260px;
+}
+
+* {
+    margin: 0;
+    padding: m0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: #b2beb5;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    opacity: .6;
+}
+
+header.header {
+    background-color: #fff;
+    height: var(--header-height);
+    box-shadow: 0 4px 7px rgb(0 0 0 / 10%);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+header .header--wrapper {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+header .header--logo {
+    width: 120px;
+}
+
+header .header--actions {
+    display: flex;
+    align-items: center;
+}
+
+header .header--actionItem {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 0 14px;
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+header .header--actionItem:hover {
+    color: var(--primary-color);
+
+}
+
+.sidebar {
+    height: calc(100% - var(--header-height));
+    position: fixed;
+    top: var(--header-height);
+    width: var(--sidebar-width);
+    background-color: #f2f3f4;
+    box-shadow: 1px 0 7px rgb(0 42 232 / 20%);
+}
+
+.sidebar .sidebar--wrapper {
+    padding: 12px;
+}
+
+.sidebar h2.sidebar--heading {
+    font-size: 1.8rem;
+    font-weight: 700;
+    border-bottom: 1px solid #999;
+    margin-bottom: 12px;
+}
+
+.sidebar .sidebar--bodyItem {
+    display: block;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 16px;
+}
+
+.sidebar .sidebar--bodyItem:hover {
+    color: var(--primary-color);
+}
+
+.sidebar .sidebar--bodyItem i {
+    margin-right: 12px;
+}
+
+
+
+
+
+
+    .content {
+        width: calc(100% - var(--sidebar-width));
+        margin-left: var(--sidebar-width);
+        margin-top: var(--header-height);
+        padding: 12px;
+    }
+
