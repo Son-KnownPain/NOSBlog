@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NOSBlog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,9 @@ namespace NOSBlog.Controllers
     {
         public ActionResult Index()
         {
+            NOSBlogEntities context = new NOSBlogEntities();
+            var allUsers = context.users.ToList();
+            ViewBag.UsersCount = allUsers.Count;
             return View();
         }
     }

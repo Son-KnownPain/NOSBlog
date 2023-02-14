@@ -77,3 +77,7 @@ D:\== ProjectBasic\AspDotNetMVC\NOSSolution\NOSBlog\obj\Debug\NOSBlog.csproj.Cor
 D:\== ProjectBasic\AspDotNetMVC\NOSSolution\NOSBlog\obj\Debug\NOSBlog.csproj.CopyComplete
 D:\== ProjectBasic\AspDotNetMVC\NOSSolution\NOSBlog\obj\Debug\NOSBlog.dll
 D:\== ProjectBasic\AspDotNetMVC\NOSSolution\NOSBlog\obj\Debug\NOSBlog.pdb
+D:\== ProjectBasic\AspDotNetMVC\NOSSolution\NOSBlog\bin\EntityFramework.dll
+D:\== ProjectBasic\AspDotNetMVC\NOSSolution\NOSBlog\bin\EntityFramework.SqlServer.dll
+D:\== ProjectBasic\AspDotNetMVC\NOSSolution\NOSBlog\bin\EntityFramework.xml
+D:\== ProjectBasic\AspDotNetMVC\NOSSolution\NOSBlog\bin\EntityFramework.SqlServer.xml
