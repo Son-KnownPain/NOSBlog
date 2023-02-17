@@ -16,5 +16,15 @@ namespace NOSBlog.Controllers
             ViewBag.UsersCount = allUsers.Count;
             return View();
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
     }
 }
