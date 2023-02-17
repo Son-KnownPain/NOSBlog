@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "NOS Blog - Register";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/Css/Pages/Register.css" />
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-user-plus"></i>
+        Register
+    </h1>
+
+    <p class="page-description">
+        Please enter all necessary information to create a new account. If you already have an account, please <a href="/home/login">login here</a>.
+    </p>
+
+    <div class="content-body">
+        <form id="login-form">
+            <div class="form-item">
+                <label class="form-label" for="">
+                    First name
+                </label>
+                <input name="first_name" class="form-input" type="text" placeholder="Enter first name..." />
+            </div>
+
+            <div class="form-item">
+                <label class="form-label" for="">
+                    Last name
+                </label>
+                <input name="last_name" class="form-input" type="text" placeholder="Enter last name..." />
+            </div>
+
+            <div class="form-item">
+                <label class="form-label" for="">
+                    Username
+                </label>
+                <input name="user_name" class="form-input" type="text" placeholder="Enter username..." />
+            </div>
+
+            <div class="form-item">
+                <label class="form-label" for="">
+                    Email
+                </label>
+                <input name="email" class="form-input" type="text" placeholder="Enter email..." />
+            </div>
+
+            <div class="form-item">
+                <label class="form-label" for="">
+                    Phone
+                </label>
+                <input name="phone" class="form-input" type="text" placeholder="Enter phone..." />
+            </div>
+
+            <div class="form-item">
+                <label class="form-label" for="">
+                    Password
+                </label>
+                <input name="password" class="form-input" type="password" placeholder="Enter password..." />
+            </div>
+
+            <button class="form-submitBtn">
+                Register
+            </button>
+        </form>
+    </div>
+</div>

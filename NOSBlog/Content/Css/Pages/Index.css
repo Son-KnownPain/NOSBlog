@@ -1,0 +1,175 @@
+﻿﻿h1.page-heading {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #333;
+    padding-top: 16px;
+}
+
+p.page-description {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #333;
+    margin-top: 16px;
+}
+
+.content-body {
+    margin-top: 28px;
+}
+
+.blog {
+    padding: 16px;
+    border: 1px solid #999;
+    border-radius: 8px;
+}
+
+    .blog:not(:first-child) {
+        margin-top: 36px;
+    }
+
+.blog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.blog-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+img.blog-userAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #999;
+}
+
+span.blog-userName {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-left: 12px;
+    color: #333;
+}
+
+span.blog-userBlueCheck {
+    font-size: 1.6rem;
+    color: #00a2e8;
+    margin-left: 4px;
+}
+
+.blog-actions {
+    margin-right: -4px;
+}
+
+.blog-actionItem {
+    font-size: 1.8rem;
+    color: #666;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 8px;
+}
+
+    .blog-actionItem:hover {
+        background-color: #c9c9c9;
+    }
+
+.blog-body {
+    margin-top: 16px;
+}
+
+h2.blog-title {
+    font-size: 2.4rem;
+    font-weight: 600;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+p.blog-summary {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 4px 0;
+}
+
+img.blog-img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+p.blog-postTime {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #999;
+}
+
+.blog-interacts {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.blog-comments {
+    margin-left: 12px;
+}
+
+/* Left content - Subcontent */
+.subcontent {
+    padding: 0 0 0 18px;
+}
+
+.subcontentItem:not(:first-child) {
+    margin-top: 36px;
+}
+
+h3.subcontent-heading {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+/* Subcontent top users */
+.subcontent-user {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-decoration: none;
+    margin-top: 16px;
+}
+
+img.subcontent-userAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+span.subcontent-userName {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-left: 12px;
+    color: #333;
+}
+
+span.subcontent-userBlueCheck {
+    font-size: 1.6rem;
+    color: #00a2e8;
+    margin-left: 4px;
+}
+/* Subcontent ads CARVAN */
+.subcontent-adsLink {
+    text-decoration: none;
+    margin-top: 18px;
+    display: inline-block;
+}
+
+.subcontent-adsText {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.subcontent-adsImg {
+    width: 100%;
+    border-radius: 4px;
+}

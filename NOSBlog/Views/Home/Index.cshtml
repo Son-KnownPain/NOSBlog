@@ -2,6 +2,319 @@
     ViewBag.Title = "Home Page";
 }
 
+@section styles {
+    <link rel="stylesheet" href="~/Content/Css/Pages/Index.css" />
+}
+
 <div class="container">
-    <h2>Tổng số người dùng: @ViewBag.UsersCount</h2>
+    <h1 class="page-heading">
+        <i class="fa-solid fa-newspaper"></i>
+        Featured Blogs
+    </h1>
+    <p class="page-description">Synthesize articles written by content collectors and creators</p>
+
+    <div class="content-body">
+        <div class="row">
+
+            <div class="col-xl-9">
+                <!-- Right content -->
+                <div class="blog">
+                    <div class="blog-header">
+                        <a class="blog-user" href="/">
+                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
+                            <span class="blog-userName">
+                                Nguyễn Hồng Sơn
+                            </span>
+                            <span class="blog-userBlueCheck">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                        </a>
+
+                        <div class="blog-actions">
+                            <span class="blog-actionItem">
+                                <i class="fa-regular fa-heart"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="blog-body">
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <h2 class="blog-title">
+                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
+                                </h2>
+                                <p class="blog-summary">
+                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
+                                </p>
+                                <p class="blog-postTime">
+                                    5 days ago
+                                </p>
+                                <div class="blog-interacts">
+                                    <span class="blog-likes">
+                                        <i class="fa-regular fa-heart"></i>
+                                        528
+                                    </span>
+                                    <span class="blog-comments">
+                                        <i class="fa-regular fa-comment"></i>
+                                        68
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog">
+                    <div class="blog-header">
+                        <a class="blog-user" href="/">
+                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
+                            <span class="blog-userName">
+                                Nguyễn Hồng Sơn
+                            </span>
+                            <span class="blog-userBlueCheck">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                        </a>
+
+                        <div class="blog-actions">
+                            <span class="blog-actionItem">
+                                <i class="fa-regular fa-heart"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="blog-body">
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <h2 class="blog-title">
+                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
+                                </h2>
+                                <p class="blog-summary">
+                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
+                                </p>
+                                <p class="blog-postTime">
+                                    5 days ago
+                                </p>
+                                <div class="blog-interacts">
+                                    <span class="blog-likes">
+                                        <i class="fa-regular fa-heart"></i>
+                                        528
+                                    </span>
+                                    <span class="blog-comments">
+                                        <i class="fa-regular fa-comment"></i>
+                                        68
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog">
+                    <div class="blog-header">
+                        <a class="blog-user" href="/">
+                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
+                            <span class="blog-userName">
+                                Nguyễn Hồng Sơn
+                            </span>
+                            <span class="blog-userBlueCheck">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                        </a>
+
+                        <div class="blog-actions">
+                            <span class="blog-actionItem">
+                                <i class="fa-regular fa-heart"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="blog-body">
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <h2 class="blog-title">
+                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
+                                </h2>
+                                <p class="blog-summary">
+                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
+                                </p>
+                                <p class="blog-postTime">
+                                    5 days ago
+                                </p>
+                                <div class="blog-interacts">
+                                    <span class="blog-likes">
+                                        <i class="fa-regular fa-heart"></i>
+                                        528
+                                    </span>
+                                    <span class="blog-comments">
+                                        <i class="fa-regular fa-comment"></i>
+                                        68
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog">
+                    <div class="blog-header">
+                        <a class="blog-user" href="/">
+                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
+                            <span class="blog-userName">
+                                Nguyễn Hồng Sơn
+                            </span>
+                            <span class="blog-userBlueCheck">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                        </a>
+
+                        <div class="blog-actions">
+                            <span class="blog-actionItem">
+                                <i class="fa-regular fa-heart"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="blog-body">
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <h2 class="blog-title">
+                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
+                                </h2>
+                                <p class="blog-summary">
+                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
+                                </p>
+                                <p class="blog-postTime">
+                                    5 days ago
+                                </p>
+                                <div class="blog-interacts">
+                                    <span class="blog-likes">
+                                        <i class="fa-regular fa-heart"></i>
+                                        528
+                                    </span>
+                                    <span class="blog-comments">
+                                        <i class="fa-regular fa-comment"></i>
+                                        68
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog">
+                    <div class="blog-header">
+                        <a class="blog-user" href="/">
+                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
+                            <span class="blog-userName">
+                                Nguyễn Hồng Sơn
+                            </span>
+                            <span class="blog-userBlueCheck">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                        </a>
+
+                        <div class="blog-actions">
+                            <span class="blog-actionItem">
+                                <i class="fa-regular fa-heart"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="blog-body">
+                        <div class="row">
+                            <div class="col-xl-8">
+                                <h2 class="blog-title">
+                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
+                                </h2>
+                                <p class="blog-summary">
+                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
+                                </p>
+                                <p class="blog-postTime">
+                                    5 days ago
+                                </p>
+                                <div class="blog-interacts">
+                                    <span class="blog-likes">
+                                        <i class="fa-regular fa-heart"></i>
+                                        528
+                                    </span>
+                                    <span class="blog-comments">
+                                        <i class="fa-regular fa-comment"></i>
+                                        68
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3">
+                <div class="subcontent">
+                    <div class="subcontentItem">
+                        <h3 class="subcontent-heading">
+                            <i class="fa-solid fa-medal"></i>
+                            Top Bloggers
+                        </h3>
+                        <a class="subcontent-user" href="/">
+                            <img class="subcontent-userAvatar" src="https://scontent.fsgn5-8.fna.fbcdn.net/v/t39.30808-1/273210769_1388075441705697_7387492738834163573_n.jpg?stp=dst-jpg_p320x320&_nc_cat=109&ccb=1-7&_nc_sid=7206a8&_nc_ohc=pHQ1baBaoNoAX-YKJiL&_nc_ht=scontent.fsgn5-8.fna&oh=00_AfAEm_8X5JsDlmHs5R7cS4wxHysDijtf2UHmUZbF5VJW0g&oe=63F10FAB" alt="User avatar" />
+                            <span class="subcontent-userName">
+                                Nguyễn Hồng Sơn
+                            </span>
+                            <span class="subcontent-userBlueCheck">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                        </a>
+                        <a class="subcontent-user" href="/">
+                            <img class="subcontent-userAvatar" src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t39.30808-1/329664533_523348906589295_616382054668327828_n.jpg?stp=dst-jpg_p320x320&_nc_cat=105&ccb=1-7&_nc_sid=7206a8&_nc_ohc=7a9hnESVg78AX-u1Cil&_nc_ht=scontent.fsgn5-2.fna&oh=00_AfBMtwg1B_s2lFg1tJXw_u21OpA5tWBote1s-dVMMJ9NBg&oe=63F100D5" alt="User avatar" />
+                            <span class="subcontent-userName">
+                                Đặng Nhã Huy
+                            </span>
+                        </a>
+                        <a class="subcontent-user" href="/">
+                            <img class="subcontent-userAvatar" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.6435-9/137637813_229554508744357_8377397991890306881_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=174925&_nc_ohc=I5re1Nkfv84AX9PYhVX&_nc_ht=scontent.fsgn5-5.fna&oh=00_AfAds-92xfrbluPUxVUf5Rln0KI3OTcht6nsM9plrAiCxA&oe=6413FF23" alt="User avatar" />
+                            <span class="subcontent-userName">
+                                Dương Huỳnh Như
+                            </span>
+                            <span class="subcontent-userBlueCheck">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                        </a>
+                        <a class="subcontent-user" href="/">
+                            <img class="subcontent-userAvatar" src="https://scontent.fsgn5-6.fna.fbcdn.net/v/t39.30808-1/273033941_1078109256373164_7457449835764584194_n.jpg?stp=dst-jpg_s320x320&_nc_cat=108&ccb=1-7&_nc_sid=7206a8&_nc_ohc=TKJ4oJlGOloAX_yH4MA&_nc_oc=AQlL2Nc1ESfH6wLi-DAAJogM8ERWXXhLzYlR9awu9pI5IIEH5Ghf6zftcCDixc8qFbAJg93t4APfzmVjGaFaDegl&_nc_ht=scontent.fsgn5-6.fna&oh=00_AfCfqBhVNrBvBYZ0XckD-alSXnhLJQKCEoyYKZBUUzsr_w&oe=63F19F40" alt="User avatar" />
+                            <span class="subcontent-userName">
+                                Nguyễn Thị Thùy Dương
+                            </span>
+                            <span class="subcontent-userBlueCheck">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                        </a>
+                        <a class="subcontent-user" href="/">
+                            <img class="subcontent-userAvatar" src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t39.30808-1/329689316_5812166148898307_6714802875780155696_n.jpg?stp=dst-jpg_p320x320&_nc_cat=105&ccb=1-7&_nc_sid=7206a8&_nc_ohc=wZs1Txw-3bwAX9JJIW0&_nc_ht=scontent.fsgn5-2.fna&oh=00_AfAyud4XYExUyA7L9FLTsj0ktcK0AVtZ6iWBKm-TxxS4qA&oe=63F0F32D" alt="User avatar" />
+                            <span class="subcontent-userName">
+                                Bạch Gia Quốc
+                            </span>
+                        </a>
+                    </div>
+                    <div class="subcontentItem">
+                        <h3 class="subcontent-heading">
+                            <i class="fa-solid fa-bullhorn"></i>
+                            Ads
+                        </h3>
+                        <a target="_blank" class="subcontent-adsLink" href="https://son-knownpain.github.io/carvan/">
+                            <p class="subcontent-adsText">CARVAN - Cars Store</p>
+                            <img class="subcontent-adsImg" src="https://son-knownpain.github.io/carvan/asset/img/logo/carvan-logo.jpg" alt="ads img" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
