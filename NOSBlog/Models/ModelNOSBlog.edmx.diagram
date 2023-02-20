@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ae619ba99bbe44f0b281359604f13259" Name="Diagram1">
+        <EntityTypeShape EntityType="NOSBlogModel.blog" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NOSBlogModel.comment" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NOSBlogModel.image" Width="1.5" PointX="5.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NOSBlogModel.item" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NOSBlogModel.user" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NOSBlogModel.user_item_collections" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="NOSBlogModel.FK__blogs__user_id__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="NOSBlogModel.FK__comments__blog_i__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="NOSBlogModel.FK__comments__user_i__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="NOSBlogModel.FK__user_item__item___52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="NOSBlogModel.FK__user_item__user___5165187F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

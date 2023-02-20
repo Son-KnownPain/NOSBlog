@@ -80,17 +80,83 @@ header .header--actionItem:hover, header .header--navItem:hover {
 
 .content {
     margin-top: calc(var(--header-height) + 12px);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.content h1.page-heading {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #333;
+    padding-top: 16px;
+}
+
+.content p.page-description {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #333;
+    margin-top: 16px;
 }
 
 footer.footer {
     display: flex;
     align-items: center;
-    background-color: #999;
+    background-color: #181821;
     font-size: 1.6rem;
     color: #fff;
-    height: 60px;
+    padding: 20px 0;
+}
+
+.footer-colWrapper {
+    padding: 0 28px;
+}
+
+footer .footer-logo {
+    width: 126px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+footer h4.footer-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    height: 63px;
+    line-height: 63px;
+    margin: 0;
+}
+
+footer p.footer-infoParagraph {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #999;
+    margin-top: 22px;
+}
+
+footer a.footer-link {
+    text-decoration: none;
+    color: #999;
+    transition: padding-left linear .1s;
+}
+
+footer a.footer-link:hover {
+    color: #fff;
+    padding-left: 4px;
 }
 
 footer.footer p.copyright {
+    padding-top: 36px;
     margin: 0;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer .footer-socialItem {
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 16px;
+    font-size: 2.2rem;
 }
