@@ -44,6 +44,31 @@ button.form-submitBtn {
     position: relative;
 }
 
+.form-invalidMessage {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: red;
+    animation: shaking ease-out .2s;
+}
+
+@keyframes shaking {
+    0% {
+        padding-left: 0;
+    }
+    25% {
+        padding-left: 10px;
+    }
+    50% {
+        padding-left: 0;
+    }
+    75% {
+        padding-left: 10px;
+    }
+    100% {
+        padding-left: 0;
+    }
+}
+
 button.form-submitBtn:hover {
     opacity: .8;
 }

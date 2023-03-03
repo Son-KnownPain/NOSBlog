@@ -11,18 +11,15 @@ namespace NOSBlog.Controllers
     {
         public ActionResult Index()
         {
-            NOSBlogEntities context = new NOSBlogEntities();
-            var allUsers = context.users.ToList();
-            ViewBag.UsersCount = allUsers.Count;
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult Policy()
         {
             return View();
         }
 
-        public ActionResult Register()
+        public ActionResult Security()
         {
             return View();
         }
