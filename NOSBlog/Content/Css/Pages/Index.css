@@ -1,4 +1,4 @@
-﻿﻿h1.page-heading {
+﻿h1.page-heading {
     font-size: 3rem;
     font-weight: 700;
     color: #333;
@@ -22,9 +22,9 @@ p.page-description {
     border-radius: 8px;
 }
 
-    .blog:not(:first-child) {
-        margin-top: 36px;
-    }
+.blog:not(:first-child) {
+    margin-top: 36px;
+}
 
 .blog-header {
     display: flex;

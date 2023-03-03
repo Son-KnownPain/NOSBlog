@@ -175,11 +175,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Css\Admin\App.css" />
+    <Content Include="Content\Css\Pages\AboutUs.css" />
     <Content Include="Content\Css\Pages\Index.css" />
     <Content Include="Content\Css\Pages\Login.css" />
     <Content Include="Content\Css\Pages\Register.css" />
+    <Content Include="Content\Images\DuongNhu.jpg" />
     <Content Include="Content\Images\Logo.png" />
     <Content Include="Content\Class-available.css" />
+    <Content Include="Content\Images\ThuyDuong.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -237,6 +240,7 @@
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
