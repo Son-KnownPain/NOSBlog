@@ -1,0 +1,109 @@
+﻿.blog-title {
+    font-size: 3.4rem;
+    font-weight: 700;
+}
+
+.blog-content {
+    margin-top: 32px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 0 24px;
+}
+
+.blog-user {
+    margin-top: 24px;
+    margin-left: 24px;
+}
+
+.blog-userAvatar {
+    border-radius: 50%;
+    border: 1px solid #999;
+    max-width: 80px;
+}
+
+.blog-userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.blog-userName {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.blog-times {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.blog-interactContent {
+    margin-top: 16px;
+    margin-left: 24px;
+}
+
+.blog-likeBtn, .blog-cmtBtn {
+    font-size: 1.6rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 12px;
+}
+
+.blog-cmtForm {
+    margin-top: 16px;
+}
+
+.blog-cmtInput {
+    padding: 6px 12px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    width: 100%;
+    outline: none;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+.blog-cmtSubmit {
+    border: none;
+    padding: 6px 12px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-top: 16px;
+    position: relative;
+    left: 100%;
+    transform: translateX(-100%);
+    border-radius: 4px;
+    background-color: #c9c9c9;
+}
+
+.blog-commentsContent {
+    margin-top: 16px;
+}
+
+.blog-cmtItem {
+    margin-top: 12px;
+}
+
+.blog-cmtContent {
+    margin-top: 8px;
+    padding-left: 24px;
+    padding-bottom: 8px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    border-style: solid;
+    border-color: #777;
+    border-width: 1px;
+    border-right: 1px;
+    border-top: 1px;
+}
+
+.blog-userCmtLikeBtn {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-top: 4px;
+    padding: 6px;
+    cursor: pointer;
+}

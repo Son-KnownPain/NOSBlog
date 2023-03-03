@@ -1,0 +1,20 @@
+﻿content-body {
+    margin-top:28px;
+}
+
+.policy-list {
+    padding: 0;
+    margin: 0;
+    margin-top: 32px;
+}
+
+li.policy-item {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 16px;
+}
+
+div.policy-itemContent {
+    font-size: 1.6rem;
+    font-weight: 500;
+}

@@ -7,11 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace NOSBlog.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class user
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,19 +24,43 @@ namespace NOSBlog.Models
             this.comments = new HashSet<comment>();
             this.user_item_collections = new HashSet<user_item_collections>();
         }
-    
+
+        [DisplayName("ID")]
         public int id { get; set; }
+
+        [DisplayName("First Name"), Required(ErrorMessage = "First name is require")]
         public string first_name { get; set; }
+
+        [DisplayName("Last Name"), Required(ErrorMessage = "Last name is require")]
         public string last_name { get; set; }
+
+        [DisplayName("Username"), Required(ErrorMessage = "Username is require")]
         public string username { get; set; }
+
+        [DisplayName("Email"), Required(ErrorMessage = "Email is require")]
         public string email { get; set; }
+
+        [DisplayName("Phone"), Required(ErrorMessage = "Phone is require")]
         public string phone { get; set; }
+
+        [DisplayName("Password"), Required(ErrorMessage = "Password is require")]
         public string password { get; set; }
+
+        [DisplayName("Role")]
         public int role { get; set; }
+
+        [DisplayName("Avatar")]
         public string avatar { get; set; }
+
+        [DisplayName("Blue Tick")]
         public bool blue_tick { get; set; }
+
+        [DisplayName("Coins")]
         public int coins { get; set; }
+
+        [DisplayName("Collection Points")]
         public int collection_points { get; set; }
+
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
     
