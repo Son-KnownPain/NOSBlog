@@ -1,4 +1,4 @@
-﻿
+﻿@model NOSBlog.Models.user
 @{
     ViewBag.Title = "NOS Blog - Login";
 }
@@ -14,11 +14,11 @@
     </h1>
 
     <p class="page-description">
-        Please enter username and password to authenticate the user. If you don't have an account, <a href="/home/register">register here</a>.
+        Please enter username and password to authenticate the user. If you don't have an account, <a href="/user/register">register here</a>.
     </p>
 
     <div class="content-body">
-        <form id="login-form">
+        @*<form id="login-form" action="/User/Check" method="POST">
             <div class="form-item">
                 <label class="form-label" for="">
                     Username
@@ -36,6 +36,22 @@
             <button class="form-submitBtn">
                 Login
             </button>
-        </form>
+        </form>*@
+        @using (Html.BeginForm("Check", "User", FormMethod.Post, new { @id = "login-form" }))
+        {
+            <div class="form-item">
+                @Html.LabelFor(user => user.username, new { @class = "form-label" })
+                @Html.EditorFor(user => user.username, new { htmlAttributes = new { @class = "form-input", placeHolder = "Enter username" } })
+                @Html.ValidationMessageFor(user => user.username, null, new { @class = "form-invalidMessage" })
+            </div>
+            <div class="form-item">
+                @Html.LabelFor(user => user.password, new { @class = "form-label" })
+                @Html.PasswordFor(user => user.password, new { @class = "form-input", placeHolder = "Enter password" })
+                @Html.ValidationMessageFor(user => user.password, null, new { @class = "form-invalidMessage" })
+            </div>
+            <button class="form-submitBtn">
+                Login
+            </button>
+        }
     </div>
 </div>

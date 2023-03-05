@@ -1,0 +1,59 @@
+﻿@model NOSBlog.Models.blog
+@{ 
+    ViewBag.Title = "Write A New Blog";
+}
+
+@section styles {
+    <link href="~/Content/Css/Pages/WriteBlog.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#content'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script>
+        document.querySelector('input[name=title]').oninput = function (e) {
+            if (e.target.value !== "") {
+                document.title = e.target.value;
+            } else {
+                document.title = "Write A New Blog"
+            }
+        }
+    </script>
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-feather"></i>
+        Write A New Blog
+    </h1>
+    @using (Html.BeginForm("New", "Blog", FormMethod.Post, new { @id = "blog-form", enctype = "multipart/form-data" }))
+    {
+        <div class="form-gr">
+            @Html.EditorFor(blog => blog.title, new { htmlAttributes = new { @class = "form-input", placeHolder = "Title" } })
+            @Html.ValidationMessageFor(blog => blog.title, null, new { @class = "form-invalidMessage" })
+        </div>
+        <div class="form-gr">
+            @Html.TextAreaFor(blog => blog.summary, new { @class = "form-input", placeHolder = "Summary" })
+            @Html.ValidationMessageFor(blog => blog.summary, null, new { @class = "form-invalidMessage" })
+        </div>
+        <div class="form-gr">
+            @Html.LabelFor(blog => blog.thumbnail, new { @class = "form-label" })
+            <input type="file" name="thumbnailFile" class="form-input" />
+            @Html.ValidationMessageFor(blog => blog.thumbnail, null, new { @class = "form-invalidMessage" })
+        </div>
+        <div class="form-gr">
+            @Html.LabelFor(blog => blog.content, new { @class = "form-label" })
+            @Html.TextAreaFor(blog => blog.content, new { @class = "form-input" })
+        </div>
+        <button class="form-btn">
+            <i class="fa-solid fa-upload"></i>
+            Post New Blog
+        </button>
+    }
+</div>

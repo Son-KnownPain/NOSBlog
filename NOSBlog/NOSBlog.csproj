@@ -131,6 +131,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Auths\UserLogin.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -183,8 +184,10 @@
     <Content Include="Content\Css\Pages\Index.css" />
     <Content Include="Content\Css\Pages\Login.css" />
     <Content Include="Content\Css\Pages\Policy.css" />
+    <Content Include="Content\Css\Pages\Profile.css" />
     <Content Include="Content\Css\Pages\Register.css" />
     <Content Include="Content\Css\Pages\Security.css" />
+    <Content Include="Content\Css\Pages\WriteBlog.css" />
     <Content Include="Content\Images\Logo.png" />
     <Content Include="Content\Class-available.css" />
     <Content Include="Content\Images\ThuyDuong.jpg" />
@@ -252,6 +255,8 @@
     <Content Include="Views\Blog\Detail.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Blog\Write.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

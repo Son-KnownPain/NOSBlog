@@ -14,7 +14,7 @@
     </h1>
 
     <p class="page-description">
-        Please enter all necessary information to create a new account. If you already have an account, please <a href="/home/login">login here</a>.
+        Please enter all necessary information to create a new account. If you already have an account, please <a href="/user/login">login here</a>.
     </p>
 
     <div class="content-body">
@@ -103,7 +103,7 @@
 
             <div class="form-item">
                 @Html.LabelFor(user => user.password, new { @class = "form-label" })
-                @Html.EditorFor(user => user.password, new { htmlAttributes = new { @class = "form-input", @placeHolder = "Enter password" } })
+                @Html.PasswordFor(user => user.password, new { @class = "form-input", placeHolder = "Enter password" })
                 @Html.ValidationMessageFor(user => user.password, null, new { @class = "form-invalidMessage" })
             </div>
 

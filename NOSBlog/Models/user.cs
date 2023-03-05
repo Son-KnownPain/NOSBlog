@@ -14,6 +14,7 @@ namespace NOSBlog.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class user
     {
@@ -60,6 +61,8 @@ namespace NOSBlog.Models
 
         [DisplayName("Collection Points")]
         public int collection_points { get; set; }
+
+        public HttpPostedFileBase avatarFile { get; set; }
 
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }

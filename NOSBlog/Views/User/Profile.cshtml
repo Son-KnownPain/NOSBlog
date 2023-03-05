@@ -1,0 +1,143 @@
+﻿@model NOSBlog.Models.user
+@section styles {
+    <link href="~/Content/Css/Pages/Profile.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script>
+        const avatarFile = document.getElementById('avatarFile');
+        avatarFile.oninput = function (e) {
+            if (avatarFile.value !== "") {
+                document.getElementById('avatarFileLabel').classList.add('selected');
+                document.getElementById('avatarFileLabel').textContent = 'Selected';
+                document.getElementById('avatarFileButton').style.display = 'inline-block';
+            }
+        }
+    </script>
+}
+
+@{
+    ViewBag.Title = "NOS Blog - Your Profile";
+}
+
+@if (TempData.ContainsKey("PostNewBlog"))
+{
+    @section toast {
+        <script>
+            toast({
+                title: 'Successfully post new blog',
+                message: '@TempData["PostNewBlog"].ToString()',
+                type: 'success'
+            })
+        </script>
+    }
+}
+
+<div class="container">
+    <div class="content-body">
+        @if (Session["UserLogin"] != null)
+        {
+            <div class="row">
+                <div class="col-xl-2">
+                    <img class="user-avatar" src="/Uploads/@ViewBag.user.avatar" alt="User avatar" />
+                </div>
+                <div class="col-xl-5">
+                    <h1 class="user-name">
+                        @ViewBag.user.last_name @ViewBag.user.first_name
+                        @if (ViewBag.user.blue_tick)
+                        {
+                            <span class="user-tick">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+                        }
+                    </h1>
+                    <p class="user-column">
+                        <i class="fa-solid fa-coins user-coinIcon"></i>
+                        Coins: <span class="user-columnValue">@ViewBag.user.coins</span>
+                    </p>
+                    <p class="user-column">
+                        <i class="fa-solid fa-star user-starIcon"></i>
+                        Collection points (Stars): <span class="user-columnValue">@ViewBag.user.collection_points</span>
+                    </p>
+                    <p class="user-column">
+                        <i class="fa-regular fa-id-card user-usernameIcon"></i>
+                        Username:
+                        <span class="user-columnValue">@@@ViewBag.user.username</span>
+                    </p>
+                    <p class="user-column">
+                        <i class="fa-solid fa-envelope user-mailIcon"></i>
+                        Email:
+                        <span class="user-columnValue">@@@ViewBag.user.email</span>
+                    </p>
+                </div>
+                <div class="col-xl-5">
+                    <div class="user-actions">
+                        @using (Html.BeginForm("ChangeAvatar", "User", FormMethod.Post, new { @class = "user-actionForm", enctype = "multipart/form-data" }))
+                        {
+                            <label id="avatarFileLabel" class="user-actionLabel" for="avatarFile">
+                                Change Avatar
+                            </label>
+                            @Html.TextBox("avatarFile", "", new { type = "file", @class = "hidden" })
+                            <button style="display: none;" id="avatarFileButton" class="user-actionBtn">Confirm</button>
+                        }
+                        <a class="user-linkAction" href="/User/ChangeInfo">
+                            Change Information
+                        </a>
+                        <a class="user-linkAction" href="/Blog/Write">
+                            Write A New Blog
+                        </a>
+                        <a class="user-linkAction" href="/User/MyItems">
+                            View My Items
+                        </a>
+                        <a class="user-linkAction" href="/Blog/Liked">
+                            Blogs Liked
+                        </a>
+                        <a class="user-linkAction" href="/User/Logout">
+                            Logout This Account
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h1 class="page-heading">
+                    Your Blogs
+                </h1>
+                <p class="page-description">
+                    Here are the blogs that you have posted
+                </p>
+                <div class="user-blogsBox">
+                    @foreach (var blog in ViewBag.blogs)
+                    {
+                        <a class="user-blogItem" href="/Blog/Detail">
+                            <h3 class="blogItem-title">
+                                @blog.title
+                            </h3>
+                            <p class="blogItem-summary">
+                                @blog.summary
+                            </p>
+                            <p class="blogItem-time">
+                                @blog.created_at.ToString("dd-MM-yyyy HH:mm")
+                            </p>
+                            <div class="blogItem-interactBox">
+                                <span class="blogItem-interactItem">
+                                    <i class="fa-regular fa-heart"></i>
+                                    @blog.like_count
+                                </span>
+                                <span class="blogItem-interactItem">
+                                    <i class="fa-regular fa-comment"></i>
+                                    @blog.comment_count
+                                </span>
+                            </div>
+                        </a>
+                    }
+                    @if (ViewBag.blogs.Count == 0)
+                    {
+                        <p class="blog-message">
+                            You haven't posted any blog yet, <a href="/Blog/Write">blog now</a>
+                        </p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

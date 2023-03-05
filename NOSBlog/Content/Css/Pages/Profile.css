@@ -1,0 +1,159 @@
+﻿.content-body {
+    margin-top: 16px;
+}
+
+input.hidden {
+    display: none;
+}
+
+img.user-avatar {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    min-width: 50%;
+    max-width: 100%;
+    border-radius: 50%;
+    border: 4px solid aqua;
+}
+
+h1.user-name {
+    font-size: 3.6rem;
+    font-weight: 600;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+span.user-tick {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-left: 12px;
+}
+
+p.user-column {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+span.user-columnValue {
+    font-weight: 600;
+    margin-left: 4px;
+    color: #6e7f80;
+}
+
+.user-coinIcon {
+    color: #e9d66b;
+}
+.user-starIcon {
+    color: #21abcd;
+}
+.user-usernameIcon {
+    color: #a52a2a;
+}
+.user-mailIcon {
+    color: #007fff;
+}
+
+.user-actions {
+    margin-top: 12px;
+}
+
+.user-actionForm {
+    display: block;
+}
+.user-actionForm:not(:first-child) {
+    margin-top: 20px;
+}
+
+label.user-actionLabel {
+    font-size: 1.8rem;
+    font-weight: 500;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all linear .3s;
+}
+label.user-actionLabel.selected {
+    background-color: #7fffd4;
+    color: #333;
+}
+
+
+button.user-actionBtn {
+    font-size: 1.8rem;
+    font-weight: 500;
+    background-color: #bcd4e6;
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-left: 16px;
+}
+
+a.user-linkAction {
+    font-size: 1.6rem;
+    font-weight: 500;
+    background-color: #bcd4e6;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    margin-top: 18px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all linear .1s;
+}
+a.user-linkAction:hover {
+    background-color: #848482;
+    color: #fff;
+}
+
+.user-blogsBox {
+    margin-top: 16px;
+}
+
+.user-blogItem {
+    padding: 12px;
+    border: 1px solid #999;
+    border-radius: 8px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
+.user-blogItem:not(:first-child) {
+    margin-top: 32px;
+}
+.user-blogItem:hover {
+    color: #333;
+}
+
+h3.blogItem-title {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #333;
+}
+
+p.blogItem-summary, p.blogItem-time, .blogItem-interactBox {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+p.blogItem-time {
+    color: #999;
+}
+
+span.blogItem-interactItem:not(:first-child) {
+    margin-left: 12px;
+}
+
+p.blog-message {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #666;
+    padding: 4px 12px;;
+    border: 1px solid #999;
+    border-radius: 4px;
+}

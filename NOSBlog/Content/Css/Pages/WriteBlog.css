@@ -1,0 +1,79 @@
+﻿#blog-form {
+    margin-top: 42px;
+    min-height: 500px;
+    font-size: 100%;
+}
+
+.form-gr {
+    margin-top: 32px;
+}
+
+.form-label, .form-input {
+    display: block;
+    color: #333;
+}
+
+.form-label {
+    font-weight: 500;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+}
+
+.form-input {
+    font-size: 1.6rem;
+    font-weight: 500;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    outline: none;
+}
+input.form-input[name=title] {
+    font-size: 2rem;
+    font-weight: 700;
+    border-color: transparent transparent #999 transparent;
+    border-radius: 0;
+}
+
+.form-invalidMessage {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #e52b50;
+}
+
+button.form-btn {
+    margin-top: 22px;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1.8rem;
+    font-weight: 500;
+    position: relative;
+    left: 100%;
+    transform: translateX(-100%);
+}
+button.form-btn:hover {
+    opacity: .8;
+}
+
+.ck-editor__editable_inline {
+    min-height: 200px;
+}
+.ck-content {
+    font-size: 1.6rem;
+}
+.ck-content p, .ck-content a {
+    font-size: 1.6rem;
+}
+.ck-content h3 {
+    font-size: 2rem;
+}
+.ck-content h2 {
+    font-size: 2.4rem;
+}
+.ck-content h1 {
+    font-size: 3rem;
+}

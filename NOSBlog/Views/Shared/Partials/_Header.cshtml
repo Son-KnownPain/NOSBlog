@@ -10,16 +10,36 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </a>
         </nav>
-
+        @if (Session["UserLogin"] == null)
+        {
+            <div class="header--userActions">
+                <a class="header--actionItem" href="/user/login">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Login
+                </a>
+                <a class="header--actionItem" href="/user/register">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Register
+                </a>
+            </div>
+        }
+        else
+        {
         <div class="header--userActions">
-            <a class="header--actionItem" href="/user/login">
-                <i class="fa-solid fa-right-to-bracket"></i>
-                Login
+            <a class="header--actionItem" href="/blog/write">
+                <i class="fa-regular fa-newspaper"></i>
+                Write Blog
             </a>
-            <a class="header--actionItem" href="/user/register">
-                <i class="fa-solid fa-user-plus"></i>
-                Register
+            <a class="header--actionItem" href="/user/profile">
+                <i class="fa-solid fa-user"></i>
+                Profile
+            </a>
+            <a class="header--actionItem" href="/user/logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
             </a>
         </div>
+        }
+
     </div>
 </div>
