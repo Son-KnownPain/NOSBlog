@@ -133,17 +133,21 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Auths\UserLogin.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\Authen.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CommentHelper.cs" />
     <Compile Include="Models\blog.cs">
       <DependentUpon>ModelNOSBlog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\comment.cs">
       <DependentUpon>ModelNOSBlog.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\image.cs">
       <DependentUpon>ModelNOSBlog.tt</DependentUpon>
     </Compile>
@@ -165,10 +169,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelNOSBlog.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SimpleUser.cs" />
     <Compile Include="Models\user.cs">
       <DependentUpon>ModelNOSBlog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user_item_collections.cs">
+      <DependentUpon>ModelNOSBlog.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_like_blogs.cs">
+      <DependentUpon>ModelNOSBlog.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user_like_comments.cs">
       <DependentUpon>ModelNOSBlog.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -263,6 +274,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\Js\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

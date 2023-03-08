@@ -28,8 +28,10 @@ namespace NOSBlog.Models
         public virtual DbSet<blog> blogs { get; set; }
         public virtual DbSet<comment> comments { get; set; }
         public virtual DbSet<image> images { get; set; }
-        public virtual DbSet<item> items { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<user_like_blogs> user_like_blogs { get; set; }
+        public virtual DbSet<user_like_comments> user_like_comments { get; set; }
+        public virtual DbSet<item> items { get; set; }
         public virtual DbSet<user_item_collections> user_item_collections { get; set; }
     }
 }

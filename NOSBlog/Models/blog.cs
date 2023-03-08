@@ -12,8 +12,6 @@ namespace NOSBlog.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web;
 
     public partial class blog
     {
@@ -21,31 +19,28 @@ namespace NOSBlog.Models
         public blog()
         {
             this.comments = new HashSet<comment>();
+            this.user_like_blogs = new HashSet<user_like_blogs>();
         }
     
         public int id { get; set; }
         public Nullable<int> user_id { get; set; }
-
-        [DisplayName("Title"), Required(ErrorMessage = "Title is require")]
         public string title { get; set; }
-
-        [DisplayName("Summary"), Required(ErrorMessage = "Summary is require")]
+        [DisplayName("Summary")]
         public string summary { get; set; }
-
-        [DisplayName("Content"), Required(ErrorMessage = "Content is require")]
+        [DisplayName("Content")]
         public string content { get; set; }
-
         [DisplayName("Thumbnail")]
         public string thumbnail { get; set; }
         public int like_count { get; set; }
         public int comment_count { get; set; }
         public bool @lock { get; set; }
-        public HttpPostedFileBase thumbnailFile { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
     
         public virtual user user { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<comment> comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<user_like_blogs> user_like_blogs { get; set; }
     }
 }

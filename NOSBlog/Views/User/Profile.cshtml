@@ -3,19 +3,6 @@
     <link href="~/Content/Css/Pages/Profile.css" rel="stylesheet" />
 }
 
-@section scripts {
-    <script>
-        const avatarFile = document.getElementById('avatarFile');
-        avatarFile.oninput = function (e) {
-            if (avatarFile.value !== "") {
-                document.getElementById('avatarFileLabel').classList.add('selected');
-                document.getElementById('avatarFileLabel').textContent = 'Selected';
-                document.getElementById('avatarFileButton').style.display = 'inline-block';
-            }
-        }
-    </script>
-}
-
 @{
     ViewBag.Title = "NOS Blog - Your Profile";
 }
@@ -27,6 +14,18 @@
             toast({
                 title: 'Successfully post new blog',
                 message: '@TempData["PostNewBlog"].ToString()',
+                type: 'success'
+            })
+        </script>
+    }
+}
+@if (TempData.ContainsKey("RemoveBlog"))
+{
+    @section toast {
+        <script>
+            toast({
+                title: 'Successfully remove blog',
+                message: '@TempData["RemoveBlog"].ToString()',
                 type: 'success'
             })
         </script>
@@ -67,7 +66,7 @@
                     <p class="user-column">
                         <i class="fa-solid fa-envelope user-mailIcon"></i>
                         Email:
-                        <span class="user-columnValue">@@@ViewBag.user.email</span>
+                        <span class="user-columnValue">@ViewBag.user.email</span>
                     </p>
                 </div>
                 <div class="col-xl-5">
@@ -108,10 +107,10 @@
                 <div class="user-blogsBox">
                     @foreach (var blog in ViewBag.blogs)
                     {
-                        <a class="user-blogItem" href="/Blog/Detail">
-                            <h3 class="blogItem-title">
+                        <div class="user-blogItem">
+                            <a class="blogItem-title" href="/Blog/Detail?blogId=@blog.id">
                                 @blog.title
-                            </h3>
+                            </a>
                             <p class="blogItem-summary">
                                 @blog.summary
                             </p>
@@ -128,7 +127,12 @@
                                     @blog.comment_count
                                 </span>
                             </div>
-                        </a>
+                            <div class="blogItem-ownerActions">
+                                <a class="blogItem-ownerActionItem" href="/Blog/Remove?blogId=@blog.id">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
                     }
                     @if (ViewBag.blogs.Count == 0)
                     {
@@ -141,3 +145,26 @@
         }
     </div>
 </div>
+
+@section scripts {
+    <script>
+        const avatarFile = document.getElementById('avatarFile');
+        avatarFile.oninput = function (e) {
+            if (avatarFile.value !== "") {
+                document.getElementById('avatarFileLabel').classList.add('selected');
+                document.getElementById('avatarFileLabel').textContent = 'Selected';
+                document.getElementById('avatarFileButton').style.display = 'inline-block';
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".blogItem-ownerActionItem").click(function (e) {
+                const isRemove = confirm("You definitely want to remove this blog");
+                if (!isRemove) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

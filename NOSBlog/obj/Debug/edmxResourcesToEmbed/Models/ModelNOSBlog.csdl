@@ -17,6 +17,7 @@
     <Property Name="updated_at" Type="DateTime" Precision="3" />
     <NavigationProperty Name="user" Relationship="Self.FK__blogs__user_id__2F10007B" FromRole="blogs" ToRole="users" />
     <NavigationProperty Name="comments" Relationship="Self.FK__comments__blog_i__37A5467C" FromRole="blogs" ToRole="comments" />
+    <NavigationProperty Name="user_like_blogs" Relationship="NOSBlogModel.FK__user_like__blog___656C112C" FromRole="blog" ToRole="user_like_blogs" />
   </EntityType>
   <EntityType Name="comment">
     <Key>
@@ -31,6 +32,7 @@
     <Property Name="updated_at" Type="DateTime" Precision="3" />
     <NavigationProperty Name="blog" Relationship="Self.FK__comments__blog_i__37A5467C" FromRole="comments" ToRole="blogs" />
     <NavigationProperty Name="user" Relationship="Self.FK__comments__user_i__38996AB5" FromRole="comments" ToRole="users" />
+    <NavigationProperty Name="user_like_comments" Relationship="NOSBlogModel.FK__user_like__comme__6A30C649" FromRole="comment" ToRole="user_like_comments" />
   </EntityType>
   <EntityType Name="image">
     <Key>
@@ -39,22 +41,6 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="item">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="price" Type="Int32" Nullable="false" />
-    <Property Name="reduce" Type="Int32" Nullable="false" />
-    <Property Name="quantity" Type="Int32" Nullable="false" />
-    <Property Name="type" Type="Byte" Nullable="false" />
-    <Property Name="collection_points" Type="Int32" Nullable="false" />
-    <Property Name="lock" Type="Boolean" Nullable="false" />
-    <Property Name="created_at" Type="DateTime" Precision="3" />
-    <Property Name="updated_at" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="user_item_collections" Relationship="Self.FK__user_item__item___52593CB8" FromRole="items" ToRole="user_item_collections" />
   </EntityType>
   <EntityType Name="user">
     <Key>
@@ -76,21 +62,9 @@
     <Property Name="updated_at" Type="DateTime" Precision="3" />
     <NavigationProperty Name="blogs" Relationship="Self.FK__blogs__user_id__2F10007B" FromRole="users" ToRole="blogs" />
     <NavigationProperty Name="comments" Relationship="Self.FK__comments__user_i__38996AB5" FromRole="users" ToRole="comments" />
-    <NavigationProperty Name="user_item_collections" Relationship="Self.FK__user_item__user___5165187F" FromRole="users" ToRole="user_item_collections" />
-  </EntityType>
-  <EntityType Name="user_item_collections">
-    <Key>
-      <PropertyRef Name="collection_points" />
-      <PropertyRef Name="price" />
-    </Key>
-    <Property Name="user_id" Type="Int32" />
-    <Property Name="item_id" Type="Int32" />
-    <Property Name="collection_points" Type="Int32" Nullable="false" />
-    <Property Name="price" Type="Int32" Nullable="false" />
-    <Property Name="created_at" Type="DateTime" Precision="3" />
-    <Property Name="updated_at" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="item" Relationship="Self.FK__user_item__item___52593CB8" FromRole="user_item_collections" ToRole="items" />
-    <NavigationProperty Name="user" Relationship="Self.FK__user_item__user___5165187F" FromRole="user_item_collections" ToRole="users" />
+    <NavigationProperty Name="user_like_blogs" Relationship="NOSBlogModel.FK__user_like__user___6477ECF3" FromRole="user" ToRole="user_like_blogs" />
+    <NavigationProperty Name="user_like_comments" Relationship="NOSBlogModel.FK__user_like__user___693CA210" FromRole="user" ToRole="user_like_comments" />
+    <NavigationProperty Name="user_item_collections" Relationship="NOSBlogModel.FK__user_item__user___7A672E12" FromRole="user" ToRole="user_item_collections" />
   </EntityType>
   <Association Name="FK__blogs__user_id__2F10007B">
     <End Role="users" Type="Self.user" Multiplicity="0..1" />
@@ -128,37 +102,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__user_item__item___52593CB8">
-    <End Role="items" Type="Self.item" Multiplicity="0..1" />
-    <End Role="user_item_collections" Type="Self.user_item_collections" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="items">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="user_item_collections">
-        <PropertyRef Name="item_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__user_item__user___5165187F">
-    <End Role="users" Type="Self.user" Multiplicity="0..1" />
-    <End Role="user_item_collections" Type="Self.user_item_collections" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="users">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="user_item_collections">
-        <PropertyRef Name="user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="NOSBlogEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="blogs" EntityType="Self.blog" />
     <EntitySet Name="comments" EntityType="Self.comment" />
     <EntitySet Name="images" EntityType="Self.image" />
-    <EntitySet Name="items" EntityType="Self.item" />
     <EntitySet Name="users" EntityType="Self.user" />
-    <EntitySet Name="user_item_collections" EntityType="Self.user_item_collections" />
     <AssociationSet Name="FK__blogs__user_id__2F10007B" Association="Self.FK__blogs__user_id__2F10007B">
       <End Role="users" EntitySet="users" />
       <End Role="blogs" EntitySet="blogs" />
@@ -171,13 +119,158 @@
       <End Role="users" EntitySet="users" />
       <End Role="comments" EntitySet="comments" />
     </AssociationSet>
-    <AssociationSet Name="FK__user_item__item___52593CB8" Association="Self.FK__user_item__item___52593CB8">
-      <End Role="items" EntitySet="items" />
+    <EntitySet Name="user_like_blogs" EntityType="NOSBlogModel.user_like_blogs" />
+    <EntitySet Name="user_like_comments" EntityType="NOSBlogModel.user_like_comments" />
+    <AssociationSet Name="FK__user_like__blog___656C112C" Association="NOSBlogModel.FK__user_like__blog___656C112C">
+      <End Role="blog" EntitySet="blogs" />
+      <End Role="user_like_blogs" EntitySet="user_like_blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_like__comme__6A30C649" Association="NOSBlogModel.FK__user_like__comme__6A30C649">
+      <End Role="comment" EntitySet="comments" />
+      <End Role="user_like_comments" EntitySet="user_like_comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_like__user___6477ECF3" Association="NOSBlogModel.FK__user_like__user___6477ECF3">
+      <End Role="user" EntitySet="users" />
+      <End Role="user_like_blogs" EntitySet="user_like_blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_like__user___693CA210" Association="NOSBlogModel.FK__user_like__user___693CA210">
+      <End Role="user" EntitySet="users" />
+      <End Role="user_like_comments" EntitySet="user_like_comments" />
+    </AssociationSet>
+    <EntitySet Name="items" EntityType="NOSBlogModel.item" />
+    <EntitySet Name="user_item_collections" EntityType="NOSBlogModel.user_item_collections" />
+    <AssociationSet Name="FK__user_item__item___7B5B524B" Association="NOSBlogModel.FK__user_item__item___7B5B524B">
+      <End Role="item" EntitySet="items" />
       <End Role="user_item_collections" EntitySet="user_item_collections" />
     </AssociationSet>
-    <AssociationSet Name="FK__user_item__user___5165187F" Association="Self.FK__user_item__user___5165187F">
-      <End Role="users" EntitySet="users" />
+    <AssociationSet Name="FK__user_item__user___7A672E12" Association="NOSBlogModel.FK__user_item__user___7A672E12">
+      <End Role="user" EntitySet="users" />
       <End Role="user_item_collections" EntitySet="user_item_collections" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="user_like_blogs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="blog_id" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="blog" Relationship="NOSBlogModel.FK__user_like__blog___656C112C" FromRole="user_like_blogs" ToRole="blog" />
+    <NavigationProperty Name="user" Relationship="NOSBlogModel.FK__user_like__user___6477ECF3" FromRole="user_like_blogs" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user_like_comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="comment_id" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="comment" Relationship="NOSBlogModel.FK__user_like__comme__6A30C649" FromRole="user_like_comments" ToRole="comment" />
+    <NavigationProperty Name="user" Relationship="NOSBlogModel.FK__user_like__user___693CA210" FromRole="user_like_comments" ToRole="user" />
+  </EntityType>
+  <Association Name="FK__user_like__blog___656C112C">
+    <End Type="NOSBlogModel.blog" Role="blog" Multiplicity="1" />
+    <End Type="NOSBlogModel.user_like_blogs" Role="user_like_blogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="blog">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_like_blogs">
+        <PropertyRef Name="blog_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_like__comme__6A30C649">
+    <End Type="NOSBlogModel.comment" Role="comment" Multiplicity="1" />
+    <End Type="NOSBlogModel.user_like_comments" Role="user_like_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_like_comments">
+        <PropertyRef Name="comment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_like__user___6477ECF3">
+    <End Type="NOSBlogModel.user" Role="user" Multiplicity="1" />
+    <End Type="NOSBlogModel.user_like_blogs" Role="user_like_blogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_like_blogs">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_like__user___693CA210">
+    <End Type="NOSBlogModel.user" Role="user" Multiplicity="1" />
+    <End Type="NOSBlogModel.user_like_comments" Role="user_like_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_like_comments">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="item">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" Nullable="false" />
+    <Property Name="reduce" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="type" Type="Byte" Nullable="false" />
+    <Property Name="collection_points" Type="Int32" Nullable="false" />
+    <Property Name="lock" Type="Boolean" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="user_item_collections" Relationship="NOSBlogModel.FK__user_item__item___7B5B524B" FromRole="item" ToRole="user_item_collections" />
+  </EntityType>
+  <EntityType Name="user_item_collections">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="item_id" Type="Int32" Nullable="false" />
+    <Property Name="collection_points" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Int32" Nullable="false" />
+    <Property Name="created_at" Type="DateTime" Precision="3" />
+    <Property Name="updated_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="item" Relationship="NOSBlogModel.FK__user_item__item___7B5B524B" FromRole="user_item_collections" ToRole="item" />
+    <NavigationProperty Name="user" Relationship="NOSBlogModel.FK__user_item__user___7A672E12" FromRole="user_item_collections" ToRole="user" />
+  </EntityType>
+  <Association Name="FK__user_item__item___7B5B524B">
+    <End Type="NOSBlogModel.item" Role="item" Multiplicity="1" />
+    <End Type="NOSBlogModel.user_item_collections" Role="user_item_collections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="item">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_item_collections">
+        <PropertyRef Name="item_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_item__user___7A672E12">
+    <End Type="NOSBlogModel.user" Role="user" Multiplicity="1" />
+    <End Type="NOSBlogModel.user_item_collections" Role="user_item_collections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_item_collections">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

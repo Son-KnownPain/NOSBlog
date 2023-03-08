@@ -3,22 +3,20 @@
     font-weight: 700;
 }
 
-.blog-content {
-    margin-top: 32px;
-    font-size: 1.6rem;
-    font-weight: 500;
-    padding: 0 24px;
-}
-
 .blog-user {
     margin-top: 24px;
     margin-left: 24px;
 }
 
 .blog-userAvatar {
-    border-radius: 50%;
     border: 1px solid #999;
-    max-width: 80px;
+    border-radius: 50%;
+    padding-top: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100%;
+    object-fit: cover;
 }
 
 .blog-userInfo {
@@ -33,10 +31,46 @@
     font-weight: 500;
 }
 
+.blog-userTick {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+}
+
 .blog-times {
     font-size: 1.4rem;
     font-weight: 400;
     margin: 0;
+}
+
+.blog-thumbnail {
+    padding: 12px;
+}
+
+img.blog-thumbnailImg {
+    width: 65%;
+    max-width: 100%;
+    border-radius: 8px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.blog-content {
+    font-size: 1.6rem;
+    margin-top: 32px;
+    padding: 0 24px;
+}
+.blog-content p, .blog-content a {
+    font-size: 1.6rem!important;
+}
+.blog-content h3 {
+    font-size: 2rem!important;
+}
+.blog-content h2 {
+    font-size: 2.4rem!important;
+}
+.blog-content h1 {
+    font-size: 3rem!important;
 }
 
 .blog-interactContent {
@@ -44,11 +78,18 @@
     margin-left: 24px;
 }
 
+.blog-interactBtns {
+    user-select: none;
+}
+
 .blog-likeBtn, .blog-cmtBtn {
     font-size: 1.6rem;
     font-weight: 500;
     cursor: pointer;
     margin-left: 12px;
+}
+.blog-likeBtn.liked i {
+    color: red;
 }
 
 .blog-cmtForm {
@@ -64,6 +105,15 @@
     border: 1px solid #999;
     border-radius: 4px;
 }
+.blog-cmtInput:focus {
+    outline: 1px solid var(--primary-color);
+}
+
+.blog-cmtInvalidMessage {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: red;
+}
 
 .blog-cmtSubmit {
     border: none;
@@ -76,6 +126,13 @@
     transform: translateX(-100%);
     border-radius: 4px;
     background-color: #c9c9c9;
+}
+
+.blog-comments {
+    height: 600px;
+    overflow-y: overlay;
+    overflow-x: clip;
+    overflow-wrap: break-word;
 }
 
 .blog-commentsContent {
@@ -100,10 +157,23 @@
 }
 
 .blog-userCmtLikeBtn {
-    display: block;
+    display: inline-block;
     font-size: 1.6rem;
     font-weight: 500;
-    margin-top: 4px;
     padding: 6px;
     cursor: pointer;
+}
+
+.blog-userCmtLikeBtn.liked i {
+    color: red;
+}
+
+.blog-userRemoveCmtBtn {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 6px;
+    cursor: pointer;
+    margin-left: 12px;
+    color: #333;
 }

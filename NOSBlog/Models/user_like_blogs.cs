@@ -12,17 +12,14 @@ namespace NOSBlog.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class user_item_collections
+    public partial class user_like_blogs
     {
         public int id { get; set; }
         public int user_id { get; set; }
-        public int item_id { get; set; }
-        public int collection_points { get; set; }
-        public int price { get; set; }
+        public int blog_id { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
-        public Nullable<System.DateTime> updated_at { get; set; }
     
-        public virtual item item { get; set; }
+        public virtual blog blog { get; set; }
         public virtual user user { get; set; }
     }
 }

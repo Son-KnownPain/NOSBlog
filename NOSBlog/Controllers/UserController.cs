@@ -19,17 +19,11 @@ namespace NOSBlog.Controllers
 
         // POST User/Check
         [HttpPost]
-        public ActionResult Check(user userData)
+        public ActionResult Check(SimpleUser userData)
         {
-            // Validation: !ModelState.IsValid
-            if (false)
+            if (!ModelState.IsValid)
             {
                 return View("~/Views/User/Login.cshtml");
-                //return Json(new
-                //{
-                //    success = false,
-                //    message = "Invalid form"
-                //});
             } else
             {
                 NOSBlogEntities context = new NOSBlogEntities();
@@ -38,19 +32,10 @@ namespace NOSBlog.Controllers
                 {
                     Session["UserLogin"] = userLogin;
                     return Redirect("/User/Profile");
-                    //return Json(new
-                    //{
-                    //    success = true,
-                    //    message = "Login successfully"
-                    //});
                 } else
                 {
-                    return Redirect("/User/Register");
-                    //return Json(new
-                    //{
-                    //    success = false,
-                    //    message = "Login fail, username or password incorrect"
-                    //});
+                    TempData["Error"] = "Username or password incorrect";
+                    return Redirect("/User/Login");
                 }
             }
         }
@@ -90,6 +75,8 @@ namespace NOSBlog.Controllers
                 context.users.Add(newUser);
                 context.SaveChanges();
 
+                TempData["Register"] = "Successfully register account, login right now";
+
                 // And redirect to login page
                 return Redirect("/User/Login");
             }
@@ -114,7 +101,7 @@ namespace NOSBlog.Controllers
                 NOSBlogEntities context = new NOSBlogEntities();
                 int userId = UserLogin.GetUserLogin().id;
                 user userLogin = context.users.FirstOrDefault(user => user.id == userId);
-                List<blog> blogsOfUser = context.blogs.Where(blog => blog.user_id == userLogin.id).ToList();
+                List<blog> blogsOfUser = context.blogs.Where(blog => blog.user_id == userLogin.id).OrderByDescending(blog => blog.id).ToList();
                 ViewBag.user = userLogin;
                 ViewBag.blogs = blogsOfUser;
                 return View();
