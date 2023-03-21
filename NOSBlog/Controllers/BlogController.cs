@@ -8,6 +8,9 @@ using System.Web.Mvc;
 using NOSBlog.Models;
 using Microsoft.SqlServer.Server;
 using System.Xml.Linq;
+using System.Data.Entity.Validation;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace NOSBlog.Controllers
 {
@@ -24,15 +27,19 @@ namespace NOSBlog.Controllers
             {
                 NOSBlogEntities context = new NOSBlogEntities();
                 blog blogDetail = context.blogs.FirstOrDefault(blog => blog.id == blogId);
+                if (blogDetail == null)
+                {
+                    return Redirect("/");
+                }
                 user userPosted = context.users.FirstOrDefault(user => user.id == blogDetail.user_id);
-                if (blogDetail == null || userPosted == null)
+                if (userPosted == null)
                 {
                     return Redirect("/");
                 }
                 // Check user login has like that blog
-                if (UserLogin.IsUserLogin())
+                if (UserLogin.IsUserLogin)
                 {
-                    int userId = UserLogin.GetUserLogin().id;
+                    int userId = UserLogin.GetUserLogin.id;
                     user userLogin = context.users.FirstOrDefault(user => user.id == userId);
                     if (userLogin != null)
                     {
@@ -72,7 +79,7 @@ namespace NOSBlog.Controllers
         [HttpGet]
         public ActionResult Write()
         {
-            if (!UserLogin.IsUserLogin())
+            if (!UserLogin.IsUserLogin)
             {
                 return Redirect("/User/Login");
             }
@@ -84,7 +91,7 @@ namespace NOSBlog.Controllers
         public ActionResult New(blog blogData, HttpPostedFileBase thumbnailFile)
         {
             // Check is login
-            if (!UserLogin.IsUserLogin())
+            if (!UserLogin.IsUserLogin)
             {
                 return Redirect("/User/Login");
             } else
@@ -99,13 +106,19 @@ namespace NOSBlog.Controllers
                 {
                     // Handle thumbnail file
                     String prefix = DateTime.Now.ToString("ddMMyyyyHHmmss-ms_");
-                    String newFileName = prefix + thumbnailFile.FileName;
                     String uploadFolderPath = Server.MapPath("~/Uploads");
+
+                    String extName = Path.GetExtension(thumbnailFile.FileName);
+
+                    Random random = new Random();
+                    int randomNumber = random.Next();
+                    String newFileName = prefix + "blog-img" + randomNumber + extName;
+
                     thumbnailFile.SaveAs(uploadFolderPath + "/" + newFileName);
 
 
                     // Insert data
-                    int userId = UserLogin.GetUserLogin().id;
+                    int userId = UserLogin.GetUserLogin.id;
                     NOSBlogEntities context = new NOSBlogEntities();
                     user userPost = context.users.FirstOrDefault(user => user.id == userId);
                     blog newBlog = new blog();
@@ -144,7 +157,7 @@ namespace NOSBlog.Controllers
             {
                 // Check if that blog belong user login
                 NOSBlogEntities context = new NOSBlogEntities();
-                int userId = UserLogin.GetUserLogin().id;
+                int userId = UserLogin.GetUserLogin.id;
                 blog blogToRemove = context.blogs.FirstOrDefault(blog => blog.id == blogId);
                 user userLogin = context.users.FirstOrDefault(user => user.id == userId);
                 if (blogToRemove == null || userLogin == null)
@@ -187,7 +200,7 @@ namespace NOSBlog.Controllers
         [HttpGet]
         public ActionResult Like(int? blogId)
         {
-            if (blogId == null || !UserLogin.IsUserLogin())
+            if (blogId == null || !UserLogin.IsUserLogin)
             {
                 return Json(
                     new {
@@ -205,7 +218,7 @@ namespace NOSBlog.Controllers
             }
             NOSBlogEntities context = new NOSBlogEntities();
             blog blogLiked = context.blogs.FirstOrDefault(blog => blog.id == blogId);
-            int userId = UserLogin.GetUserLogin().id;
+            int userId = UserLogin.GetUserLogin.id;
             user userLikeBlog = context.users.FirstOrDefault(user => user.id == userId);
             if (blogLiked == null || userLikeBlog == null)
             {
@@ -270,7 +283,7 @@ namespace NOSBlog.Controllers
         public ActionResult Unlike(int? blogId)
         {
             // Check if query param is null or unauthorize
-            if (blogId == null || !UserLogin.IsUserLogin())
+            if (blogId == null || !UserLogin.IsUserLogin)
             {
                 return Json(
                     new
@@ -289,7 +302,7 @@ namespace NOSBlog.Controllers
             }
             NOSBlogEntities context = new NOSBlogEntities();
             blog blogUnliked = context.blogs.FirstOrDefault(blog => blog.id == blogId);
-            int userId = UserLogin.GetUserLogin().id;
+            int userId = UserLogin.GetUserLogin.id;
             user userUnlikeBlog = context.users.FirstOrDefault(user => user.id == userId);
             // Check if doesn't exist blog or user
             if (blogUnliked == null || userUnlikeBlog == null)
@@ -351,7 +364,7 @@ namespace NOSBlog.Controllers
         {
             
             // Check is valid form
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid && !content.Equals(""))
             {
                 return Json(
                     new
@@ -368,7 +381,7 @@ namespace NOSBlog.Controllers
                 );
             }
             // Check id and user is login
-            if (blogId == null || !UserLogin.IsUserLogin())
+            if (blogId == null || !UserLogin.IsUserLogin)
             {
                 return Json(new
                 {
@@ -385,7 +398,7 @@ namespace NOSBlog.Controllers
 
             NOSBlogEntities context = new NOSBlogEntities();
             blog blogCmt = context.blogs.FirstOrDefault(blog => blog.id == blogId);
-            int userId = UserLogin.GetUserLogin().id;
+            int userId = UserLogin.GetUserLogin.id;
             user userCmt = context.users.FirstOrDefault(user => user.id == userId);
             // Check null
             if (userCmt == null || blogCmt == null)
@@ -431,6 +444,57 @@ namespace NOSBlog.Controllers
                     heart = newComment.like_count
                 }
             });
+        }
+
+        // GET: /Blog/Lock?blogId=int
+        [HttpGet]
+        public ActionResult Lock(int? blogId)
+        {
+            if (!ModelState.IsValid) return Redirect("/User/Profile");
+            // if not give me blog id or still not login
+            if (blogId == null || !UserLogin.IsUserLogin)
+            {
+                return Redirect("/User/Profile");
+            } else
+            {
+                NOSBlogEntities context = new NOSBlogEntities();
+                blog blogToLock = context.blogs.FirstOrDefault(blog => blog.id == blogId);
+                int userId = UserLogin.GetUserLogin.id;
+                // blog found and lock = false and that your blog
+                if (blogToLock != null && !blogToLock.@lock && blogToLock.user_id == userId)
+                {
+                    user userGetCoins = context.users.FirstOrDefault(user => user.id == userId);
+                    if (userGetCoins != null)
+                    {
+                        userGetCoins.coins += blogToLock.like_count;
+                    }
+                    else
+                    {
+                        return Redirect("/User/Profile");
+                    }
+                    blogToLock.@lock = true;
+                    context.SaveChanges();
+                }
+                //try
+                //{
+                    
+                //}
+                //catch (DbEntityValidationException e)
+                //{
+                //    foreach (var eve in e.EntityValidationErrors)
+                //    {
+                //        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                //        foreach (var ve in eve.ValidationErrors)
+                //        {
+                //            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                //                ve.PropertyName, ve.ErrorMessage);
+                //        }
+                //    }
+                //}
+
+                return Redirect("/User/Profile");
+            }
         }
     }
 }

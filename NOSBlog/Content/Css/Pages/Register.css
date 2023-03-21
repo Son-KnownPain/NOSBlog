@@ -49,6 +49,9 @@ button.form-submitBtn {
     font-weight: 500;
     color: red;
     animation: shaking ease-out .2s;
+    overflow-wrap: break-word;
+    display: inline-block;
+    max-width: 360px;
 }
 
 @keyframes shaking {

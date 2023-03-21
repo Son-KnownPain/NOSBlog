@@ -1,0 +1,45 @@
+﻿.content-body {
+    margin-top: 24px;
+}
+
+.form-box {
+    margin-top: 20px;
+}
+
+label.form-label {
+    display: block;
+}
+
+input.form-input {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #999;
+}
+
+.form-invalidMessage {
+    color: red!important;
+}
+
+label.form-label, input.form-input, .form-invalidMessage {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #333;
+}
+
+button.form-btn {
+    margin-top: 30px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    outline: none;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 12px;
+    background-color: var(--primary-color);
+    color: #fff;
+    position: relative;
+    left: 100%;
+    transform: translateX(-100%);
+}

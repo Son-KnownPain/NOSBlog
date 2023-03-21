@@ -130,20 +130,28 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Auths\UserLogin.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\Authen.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BlogHelper.cs" />
+    <Compile Include="Helpers\ItemHelper.cs" />
     <Compile Include="Helpers\CommentHelper.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\RoleHelper.cs" />
+    <Compile Include="Models\Admin\EditUserViewModel.cs" />
     <Compile Include="Models\blog.cs">
       <DependentUpon>ModelNOSBlog.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\comment.cs">
       <DependentUpon>ModelNOSBlog.tt</DependentUpon>
     </Compile>
@@ -190,9 +198,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Css\Admin\App.css" />
+    <Content Include="Content\Css\Admin\Item\Create.css" />
+    <Content Include="Content\Css\Admin\Item\Index.css" />
+    <Content Include="Content\Css\Admin\User\Edit.css" />
+    <Content Include="Content\Css\Admin\User\Index.css" />
     <Content Include="Content\Css\Pages\AboutUs.css" />
     <Content Include="Content\Css\Pages\BlogDetail.css" />
+    <Content Include="Content\Css\Pages\ChangeInfo.css" />
     <Content Include="Content\Css\Pages\Index.css" />
+    <Content Include="Content\Css\Pages\Item\Index.css" />
+    <Content Include="Content\Css\Pages\LikedBlogs.css" />
     <Content Include="Content\Css\Pages\Login.css" />
     <Content Include="Content\Css\Pages\Policy.css" />
     <Content Include="Content\Css\Pages\Profile.css" />
@@ -232,7 +247,11 @@
     <Content Include="Models\ModelNOSBlog.edmx.diagram">
       <DependentUpon>ModelNOSBlog.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Role.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -268,12 +287,16 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Blog\Write.cshtml" />
+    <Content Include="Views\User\LikedBlogs.cshtml" />
+    <Content Include="Views\User\ChangeInfo.cshtml" />
+    <Content Include="Views\Item\Index.cshtml" />
+    <Content Include="Views\User\MyItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\Js\" />
-    <Folder Include="Uploads\" />
+    <Folder Include="Uploads\Items\" />
     <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>

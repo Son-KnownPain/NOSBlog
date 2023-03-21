@@ -9,26 +9,40 @@
 
 @if (TempData.ContainsKey("PostNewBlog"))
 {
-    @section toast {
-        <script>
+    try
+    {
+        @section toast {
+            <script>
             toast({
                 title: 'Successfully post new blog',
                 message: '@TempData["PostNewBlog"].ToString()',
                 type: 'success'
             })
-        </script>
+            </script>
+        }
+    }
+    catch (Exception e)
+    {
+
     }
 }
 @if (TempData.ContainsKey("RemoveBlog"))
 {
-    @section toast {
-        <script>
+    try
+    {
+        @section toast {
+            <script>
             toast({
                 title: 'Successfully remove blog',
                 message: '@TempData["RemoveBlog"].ToString()',
                 type: 'success'
             })
-        </script>
+            </script>
+        }
+    } 
+    catch(Exception e)
+    {
+
     }
 }
 
@@ -88,7 +102,7 @@
                         <a class="user-linkAction" href="/User/MyItems">
                             View My Items
                         </a>
-                        <a class="user-linkAction" href="/Blog/Liked">
+                        <a class="user-linkAction" href="/User/LikedBlogs">
                             Blogs Liked
                         </a>
                         <a class="user-linkAction" href="/User/Logout">
@@ -128,9 +142,15 @@
                                 </span>
                             </div>
                             <div class="blogItem-ownerActions">
-                                <a class="blogItem-ownerActionItem" href="/Blog/Remove?blogId=@blog.id">
+                                <a class="blogItem-ownerActionItem" href="/Blog/Remove?blogId=@blog.id" title="Remove blog">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>
+                                @if (!blog.@lock)
+                                {
+                                    <a class="blogItem-ownerActionItem" href="/Blog/Lock?blogId=@blog.id" title="Change likes to coins">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </a>
+                                }
                             </div>
                         </div>
                     }
@@ -160,7 +180,7 @@
     <script>
         $(document).ready(function () {
             $(".blogItem-ownerActionItem").click(function (e) {
-                const isRemove = confirm("You definitely want to remove this blog");
+                const isRemove = confirm("You sure do it");
                 if (!isRemove) {
                     e.preventDefault();
                 }

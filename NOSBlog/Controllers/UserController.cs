@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using NOSBlog.Models;
 using System.Web.Helpers;
 using NOSBlog.Auths;
+using System.Text.RegularExpressions;
 
 namespace NOSBlog.Controllers
 {
@@ -92,15 +93,16 @@ namespace NOSBlog.Controllers
         // GET /User/Profile
         public ActionResult Profile()
         {
-            if (!UserLogin.IsUserLogin())
+            if (!UserLogin.IsUserLogin)
             {
                 return Redirect("/");
             }
             else
             {
                 NOSBlogEntities context = new NOSBlogEntities();
-                int userId = UserLogin.GetUserLogin().id;
+                int userId = UserLogin.GetUserLogin.id;
                 user userLogin = context.users.FirstOrDefault(user => user.id == userId);
+                if (userLogin == null) return RedirectToAction("Login");
                 List<blog> blogsOfUser = context.blogs.Where(blog => blog.user_id == userLogin.id).OrderByDescending(blog => blog.id).ToList();
                 ViewBag.user = userLogin;
                 ViewBag.blogs = blogsOfUser;
@@ -112,13 +114,13 @@ namespace NOSBlog.Controllers
         [HttpPost]
         public ActionResult ChangeAvatar(HttpPostedFileBase avatarFile)
         {
-            if (!UserLogin.IsUserLogin())
+            if (!UserLogin.IsUserLogin)
             {
                 return Redirect("/");
             }
             if (avatarFile != null && avatarFile.ContentLength > 0 && avatarFile.ContentLength <= 32000000)
             {
-                user userLogin = UserLogin.GetUserLogin();
+                user userLogin = UserLogin.GetUserLogin;
                 NOSBlogEntities context = new NOSBlogEntities();
                 user userToChangeAvt = context.users.FirstOrDefault(user => user.id == userLogin.id);
                 if (userToChangeAvt != null)
@@ -127,12 +129,22 @@ namespace NOSBlog.Controllers
                     // vào database
                     String prefix = DateTime.Now.ToString("ddMMyyyyHHmmss-ms");
                     String uploadFolderPath = Server.MapPath("~/Uploads");
-                    String newAvtFileName = prefix + "-" + avatarFile.FileName;
+                    String newAvtFileName;
+                    if (Regex.IsMatch(avatarFile.FileName, "\\w+"))
+                    {
+                        newAvtFileName = prefix + "-" + avatarFile.FileName;
+                    } else
+                    {
+                        Random random = new Random();
+                        int randomNumber = random.Next();
+                        newAvtFileName = "default" + randomNumber;
+                    }
                     // Name của file avt cũ
                     String oldFileName = userToChangeAvt.avatar;
 
                     // Change avt and save file to uploads folder
                     userToChangeAvt.avatar = newAvtFileName;
+                    userToChangeAvt.updated_at = DateTime.Now;
                     avatarFile.SaveAs(uploadFolderPath + '/' + newAvtFileName);
 
                     // Xóa file avt cũ đi
@@ -146,6 +158,78 @@ namespace NOSBlog.Controllers
             }
 
             return RedirectToAction("Profile");
+        }
+
+        // GET /User/LikedBlogs
+        [HttpGet]
+        public ActionResult LikedBlogs()
+        {
+            if (!UserLogin.IsUserLogin)
+            {
+                return Redirect("/User/Login");
+            }
+            NOSBlogEntities context = new NOSBlogEntities();
+            int userId = UserLogin.GetUserLogin.id;
+            List<Int32> listBlogId = context.user_like_blogs.Where(rd => rd.user_id == userId).Select(rd => rd.blog_id).ToList();
+
+            List<blog> likedBlogs = context.blogs.Where(blog => listBlogId.Contains(blog.id)).ToList();
+            ViewBag.likedBlogs = likedBlogs;
+            return View();
+        }
+
+        // GET /User/ChangeInfo
+        [HttpGet]
+        public ActionResult ChangeInfo()
+        {
+            if (!UserLogin.IsUserLogin)
+            {
+                return Redirect("/User/Login");
+            }
+            NOSBlogEntities context = new NOSBlogEntities();
+            int userId = UserLogin.GetUserLogin.id;
+            user userToUpdate = context.users.FirstOrDefault(u => u.id == userId);
+            if (userToUpdate == null)
+            {
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+            return View(userToUpdate);
+        }
+
+        // PUT /User/UpdateInfo
+        [HttpPut]
+        public ActionResult UpdateInfo(user userData)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("~/Views/User/ChangeInfo.cshtml");
+            }
+            NOSBlogEntities context = new NOSBlogEntities();
+            user userToUpdate = context.users.FirstOrDefault(user => user.id == userData.id);
+            if (userToUpdate == null) return Redirect("/User/ChangeInfo");
+            userToUpdate.first_name = userData.first_name;
+            userToUpdate.last_name = userData.last_name;
+            userToUpdate.username = userData.username;
+            userToUpdate.email = userData.email;
+            userToUpdate.phone = userData.phone;
+            userToUpdate.password = Crypto.HashPassword(userData.password);
+            userToUpdate.updated_at = DateTime.Now;
+            context.SaveChanges();
+            return Redirect("/User/Profile");
+        }
+
+        // GET /User/MyItems
+        [HttpGet]
+        public ActionResult MyItems()
+        {
+            if (!UserLogin.IsUserLogin) return RedirectToAction("Login");
+            int userId = UserLogin.GetUserLogin.id;
+            NOSBlogEntities context = new NOSBlogEntities();
+            List<Int32> listItemId = context.user_item_collections.Where(x => x.user_id == userId).Select(x => x.item_id).ToList();
+            List<item> items = context.items.Where(item => listItemId.Contains(item.id)).ToList();
+
+            ViewBag.items = items;
+
+            return View();
         }
     }
 }

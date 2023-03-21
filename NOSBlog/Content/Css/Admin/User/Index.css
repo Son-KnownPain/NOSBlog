@@ -1,0 +1,100 @@
+﻿.content-body, .page-actions {
+    margin-top: 22px;
+}
+
+.page-actionItem {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 12px 16px;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+}
+
+.page-actionItem:hover {
+    color: #fff;
+    opacity: .8;
+}
+
+.userItem {
+    padding: 8px;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+.userItem:not(:first-child) {
+    margin-top: 12px;
+}
+
+.userItem-avatar {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    object-fit: cover;
+    width: 100%;
+    padding-top: 100%;
+    border-radius: 50%;
+    border: 1px solid #999;
+}
+
+.userItem-body {
+    padding-left: 24px;
+}
+
+.userItem-infoLine {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+.userItem-infoLine:not(:first-child) {
+    margin-top: 8px;
+}
+
+.userItem-fullname {
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.userItem-blueTick {
+    color: var(--primary-color);
+}
+
+.userItem-phone, .userItem-email {
+    color: #666;
+}
+
+.userItem-actionItem {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    background-color: #777;
+    text-align: center;
+    border-radius: 4px;
+}
+.userItem-actionItem:hover {
+    color: currentColor;
+    opacity: .8;
+}
+.userItem-actionItem:not(:first-child) {
+    margin-top: 10px;
+}
+.userItem-editAction {
+    color: #333;
+    background-color: #ffbf00;
+}
+.userItem-deleteAction {
+    color: #fff;
+    background-color: #e32636;
+}
+.userItem-roleAction {
+    color: #fff;
+    background-color: #5d8aa8;
+}
+.userItem-tickAction {
+    color: #fff;
+    background-color: #007fff;
+}

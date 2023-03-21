@@ -11,7 +11,9 @@ namespace NOSBlog.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class user
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,11 +27,23 @@ namespace NOSBlog.Models
         }
     
         public int id { get; set; }
+        [DisplayName("First name"), Required(ErrorMessage = "Fisrt name is required")]
+        [StringLength(50, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 1)]
         public string first_name { get; set; }
+        [DisplayName("Last name"), Required(ErrorMessage = "Last name is required")]
+        [StringLength(50, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 1)]
         public string last_name { get; set; }
+        [DisplayName("Username"), Required(ErrorMessage = "Username is required")]
+        [RegularExpression("[a-z_0-9]{5,16}", ErrorMessage = "Username only accept a-z and 0-9, length from 5 to 15")]
         public string username { get; set; }
+        [DisplayName("Email"), Required(ErrorMessage = "Email is required")]
+        [RegularExpression("^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$", ErrorMessage = "Email format is incorret")]
         public string email { get; set; }
+        [DisplayName("Phone"), Required(ErrorMessage = "Phone is required")]
+        [RegularExpression("[0-9]{10}", ErrorMessage = "Phone must have 10 numbers")]
         public string phone { get; set; }
+        [DisplayName("Password"), Required(ErrorMessage = "Password is required")]
+        [StringLength(255, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
         public string password { get; set; }
         public int role { get; set; }
         public string avatar { get; set; }

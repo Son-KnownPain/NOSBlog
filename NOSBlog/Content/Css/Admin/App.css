@@ -120,10 +120,14 @@ header .header--actionItem:hover {
 
 
 
-    .content {
-        width: calc(100% - var(--sidebar-width));
-        margin-left: var(--sidebar-width);
-        margin-top: var(--header-height);
-        padding: 12px;
-    }
+.content {
+    width: calc(100% - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+    margin-top: var(--header-height);
+    padding: 16px;
+}
 
+h1.page-heading {
+    font-size: 2.6rem;
+    font-weight: 700;
+}

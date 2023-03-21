@@ -1,0 +1,51 @@
+﻿@using NOSBlog.Helpers 
+@section styles {
+    <style>
+        .roleSelect, .roleBtn {
+            font-size: 1.6rem;
+            font-weight: 500;
+        }
+        .roleSelect {
+            padding: 6px 12px;
+            min-width: 300px;
+            max-width: 100%;
+            outline: none;
+            border-radius: 4px;
+        }
+        .roleBtn {
+            padding: 6px 12px;
+            min-width: 100px;
+            max-width: 100%;
+            outline: none;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+    </style>
+}
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-user-shield"></i>
+        Choose Role
+    </h1>
+    <div class="content-body">
+        @using (Html.BeginForm("ChangeRole", "User", new { area = "Admin" }, FormMethod.Post, new { @class = "userForm" }))
+        {
+            <input type="hidden" name="id" value="@ViewBag.userId" />
+            @Html.HttpMethodOverride("PUT")
+            <select name="role" class="roleSelect">
+                <option value="1">@RoleHelper.RoleString(1)</option>
+                <option value="5">@RoleHelper.RoleString(5)</option>
+                <option value="10">@RoleHelper.RoleString(10)</option>
+            </select>
+            <button class="roleBtn">
+                Confirm
+            </button>
+        }
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@using NOSBlog.Helpers
+@section styles {
+    <link rel="stylesheet" href="~/Content/Css/Pages/Item/Index.css" />
+}
+@{ 
+    ViewBag.Title = "NOS Blog | Items Shop";
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        Items Shop
+    </h1>
+
+    <div class="content-body">
+        <div class="items">
+            <div class="row">
+                @foreach (var item in ViewBag.items)
+                {
+                    <div class="col-xl-2">
+                        <div class="item">
+                            <div class="item-img" style="background-image: url('/Uploads/Items/@item.image')"></div>
+                            <div class="item-info">
+                                <h3 class="item-name">@item.name</h3>
+                                <p class="item-priceBox">
+                                    <span class="item-price">
+                                        <i class="fa-solid fa-coins"></i>
+                                        @ItemHelper.MinusOne(item.price, item.reduce)
+                                    </span>
+                                    <span class="item-cp">
+                                        <i class="fa-solid fa-star"></i>
+                                        @item.collection_points
+                                    </span>
+                                </p>
+                                <a href="/Item/Buy?itemId=@item.id" class="item-buyBtn">
+                                    Buy it
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

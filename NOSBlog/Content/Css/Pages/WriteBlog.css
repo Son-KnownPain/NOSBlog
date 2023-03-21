@@ -64,16 +64,20 @@ button.form-btn:hover {
 }
 .ck-content {
     font-size: 1.6rem;
+    font-weight: 500;
 }
 .ck-content p, .ck-content a {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+}
+.ck-content h4 {
+    font-size: 2.2rem;
+    font-weight: 600;
 }
 .ck-content h3 {
-    font-size: 2rem;
+    font-size: 2.8rem;
+    font-weight: 700;
 }
 .ck-content h2 {
-    font-size: 2.4rem;
-}
-.ck-content h1 {
-    font-size: 3rem;
+    font-size: 3.2rem;
+    font-weight: 800;
 }

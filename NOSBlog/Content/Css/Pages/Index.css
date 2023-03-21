@@ -71,16 +71,22 @@ span.blog-userBlueCheck {
     cursor: pointer;
     margin: 0 8px;
 }
+.blog-actionItem:hover {
+    background-color: #c9c9c9;
+}
 
-    .blog-actionItem:hover {
-        background-color: #c9c9c9;
-    }
+.blog-actionItem.blog-actionLikeBtn.liked i {
+    color: red;
+}
 
 .blog-body {
     margin-top: 16px;
 }
 
-h2.blog-title {
+a.blog-title {
+    color: #333;
+    text-decoration: none;
+    display: block;
     font-size: 2.4rem;
     font-weight: 600;
     padding: 4px 0;
@@ -96,6 +102,8 @@ p.blog-summary {
 img.blog-img {
     width: 100%;
     border-radius: 8px;
+    max-height: 200px;
+    object-fit: cover;
 }
 
 p.blog-postTime {

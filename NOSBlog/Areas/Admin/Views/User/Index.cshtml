@@ -1,0 +1,94 @@
+﻿@using NOSBlog.Helpers
+@section styles {
+    <link rel="stylesheet" href="~/Content/Css/Admin/User/Index.css" />
+}
+@{
+    ViewBag.Title = "Users manager";
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-users"></i>
+        Users Manager
+    </h1>
+    @*<div class="page-actions">
+        <a class="page-actionItem" href="/admin/item/create">
+            Create New Item
+        </a>
+    </div>*@
+    <div class="content-body">
+        <div class="usersBox">
+            @foreach (var user in ViewBag.users)
+            {
+                <div class="userItem">
+                    <div class="row">
+                        <div class="col-xl-2">
+                            <div class="userItem-avatar" style="background-image: url(/Uploads/@user.avatar)"></div>
+                        </div>
+                        <div class="col-xl-8">
+                            <div class="userItem-body">
+                                <p class="userItem-username userItem-infoLine">
+                                    @user.username
+                                    @if (user.blue_tick)
+                                    {
+                                        <span class="userItem-blueTick">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                        </span>
+                                    }
+                                </p>
+                                <h3 class="userItem-fullname userItem-infoLine">@user.last_name @user.first_name</h3>
+                                <p class="userItem-phone userItem-infoLine">@user.phone</p>
+                                <p class="userItem-email userItem-infoLine">@user.email</p>
+                                <p class="userItem-infoLine">
+                                    <span>
+                                        @user.coins
+                                        <i class="fa-solid fa-coins" style="color: #ffbf00"></i>
+                                    </span>
+                                    |
+                                    <span>
+                                        @user.collection_points
+                                        <i class="fa-solid fa-star" style="color: #007fff"></i>
+                                    </span>
+                                </p>
+                                <p class="userItem-infoLine">
+                                    Role: @RoleHelper.RoleString(user.role)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xl-2">
+                            <div class="userItem-actions">
+                                <a class="userItem-actionItem userItem-editAction" href="/admin/user/edit?userId=@user.id">
+                                    Edit
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
+                                <a class="userItem-actionItem userItem-deleteAction" href="/admin/user/delete?userId=@user.id">
+                                    Delete
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </a>
+                                <a class="userItem-actionItem userItem-roleAction" href="/admin/user/role?userId=@user.id">
+                                    Role
+                                    <i class="fa-solid fa-user-shield"></i>
+                                </a>
+                                <a class="userItem-actionItem userItem-tickAction" href="/admin/user/tick?userId=@user.id">
+                                    Blue Tick
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+@section scripts {
+    <script>
+        $(".userItem-deleteAction").click(e => {
+            if (!confirm("You sure delete that user?")) {
+                e.preventDefault();
+            }
+        })
+    </script>
+}

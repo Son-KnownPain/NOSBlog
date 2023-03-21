@@ -1,4 +1,5 @@
-﻿@{
+﻿@using NOSBlog.Helpers;
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -18,241 +19,61 @@
 
             <div class="col-xl-9">
                 <!-- Right content -->
-                <div class="blog">
-                    <div class="blog-header">
-                        <a class="blog-user" href="/">
-                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="blog-userName">
-                                Nguyễn Hồng Sơn
-                            </span>
-                            <span class="blog-userBlueCheck">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                        </a>
+                @foreach (var blogItem in ViewBag.blogs)
+                {
+                    <div class="blog">
+                        <div class="blog-header">
+                            <a class="blog-user" href="/">
+                                <img class="blog-userAvatar" src="/Uploads/@blogItem.avatar" alt="User avatar" />
+                                <span class="blog-userName">
+                                    @blogItem.fullname
+                                </span>
+                                @if (blogItem.blue_tick)
+                                {
+                                    <span class="blog-userBlueCheck">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </span>
+                                }
+                            </a>
 
-                        <div class="blog-actions">
-                            <span class="blog-actionItem">
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
+                            <div class="blog-actions">
+                                <span class="blog-actionItem blog-actionLikeBtn @BlogHelper.IsLiked(blogItem.id)" data-blog-id="@blogItem.id">
+                                    <i class="fa-solid fa-heart"></i>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="blog-body">
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <h2 class="blog-title">
-                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
-                                </h2>
-                                <p class="blog-summary">
-                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
-                                </p>
-                                <p class="blog-postTime">
-                                    5 days ago
-                                </p>
-                                <div class="blog-interacts">
-                                    <span class="blog-likes">
-                                        <i class="fa-regular fa-heart"></i>
-                                        528
-                                    </span>
-                                    <span class="blog-comments">
-                                        <i class="fa-regular fa-comment"></i>
-                                        68
-                                    </span>
+                        <div class="blog-body">
+                            <div class="row">
+                                <div class="col-xl-8">
+                                    <a class="blog-title" href="/Blog/Detail?blogId=@blogItem.id">
+                                        @blogItem.title
+                                    </a>
+                                    <p class="blog-summary">
+                                        @blogItem.summary
+                                    </p>
+                                    <p class="blog-postTime">
+                                        @DateTimeHelper.TimeAgo(blogItem.created_at)
+                                    </p>
+                                    <div class="blog-interacts">
+                                        <span class="blog-likes">
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span id="blog-likeCount-@blogItem.id">
+                                                @blogItem.like_count
+                                            </span>
+                                        </span>
+                                        <span class="blog-comments">
+                                            <i class="fa-regular fa-comment"></i>
+                                            @blogItem.comment_count
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4">
+                                    <img class="blog-img" src="/Uploads/@blogItem.thumbnail" alt="Hinh anh blog" />
                                 </div>
                             </div>
-                            <div class="col-xl-4">
-                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
-                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="blog">
-                    <div class="blog-header">
-                        <a class="blog-user" href="/">
-                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="blog-userName">
-                                Nguyễn Hồng Sơn
-                            </span>
-                            <span class="blog-userBlueCheck">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                        </a>
-
-                        <div class="blog-actions">
-                            <span class="blog-actionItem">
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="blog-body">
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <h2 class="blog-title">
-                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
-                                </h2>
-                                <p class="blog-summary">
-                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
-                                </p>
-                                <p class="blog-postTime">
-                                    5 days ago
-                                </p>
-                                <div class="blog-interacts">
-                                    <span class="blog-likes">
-                                        <i class="fa-regular fa-heart"></i>
-                                        528
-                                    </span>
-                                    <span class="blog-comments">
-                                        <i class="fa-regular fa-comment"></i>
-                                        68
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog">
-                    <div class="blog-header">
-                        <a class="blog-user" href="/">
-                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="blog-userName">
-                                Nguyễn Hồng Sơn
-                            </span>
-                            <span class="blog-userBlueCheck">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                        </a>
-
-                        <div class="blog-actions">
-                            <span class="blog-actionItem">
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="blog-body">
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <h2 class="blog-title">
-                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
-                                </h2>
-                                <p class="blog-summary">
-                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
-                                </p>
-                                <p class="blog-postTime">
-                                    5 days ago
-                                </p>
-                                <div class="blog-interacts">
-                                    <span class="blog-likes">
-                                        <i class="fa-regular fa-heart"></i>
-                                        528
-                                    </span>
-                                    <span class="blog-comments">
-                                        <i class="fa-regular fa-comment"></i>
-                                        68
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog">
-                    <div class="blog-header">
-                        <a class="blog-user" href="/">
-                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="blog-userName">
-                                Nguyễn Hồng Sơn
-                            </span>
-                            <span class="blog-userBlueCheck">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                        </a>
-
-                        <div class="blog-actions">
-                            <span class="blog-actionItem">
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="blog-body">
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <h2 class="blog-title">
-                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
-                                </h2>
-                                <p class="blog-summary">
-                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
-                                </p>
-                                <p class="blog-postTime">
-                                    5 days ago
-                                </p>
-                                <div class="blog-interacts">
-                                    <span class="blog-likes">
-                                        <i class="fa-regular fa-heart"></i>
-                                        528
-                                    </span>
-                                    <span class="blog-comments">
-                                        <i class="fa-regular fa-comment"></i>
-                                        68
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog">
-                    <div class="blog-header">
-                        <a class="blog-user" href="/">
-                            <img class="blog-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="blog-userName">
-                                Nguyễn Hồng Sơn
-                            </span>
-                            <span class="blog-userBlueCheck">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                        </a>
-
-                        <div class="blog-actions">
-                            <span class="blog-actionItem">
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="blog-body">
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <h2 class="blog-title">
-                                    Chuyển nghề sang lập trình có khó khăn như nhiều người nghĩ?
-                                </h2>
-                                <p class="blog-summary">
-                                    Trong thời đại số hiện nay, thế giới trở nên “phẳng” hơn và cơ hội cũng mở ra nhiều hơn với tất cả mọi người. Người ta có thể thay...
-                                </p>
-                                <p class="blog-postTime">
-                                    5 days ago
-                                </p>
-                                <div class="blog-interacts">
-                                    <span class="blog-likes">
-                                        <i class="fa-regular fa-heart"></i>
-                                        528
-                                    </span>
-                                    <span class="blog-comments">
-                                        <i class="fa-regular fa-comment"></i>
-                                        68
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <img class="blog-img" src="~/Content/Images/test.jpg" alt="Hinh anh blog" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
 
             <div class="col-xl-3">
@@ -262,45 +83,21 @@
                             <i class="fa-solid fa-medal"></i>
                             Top Bloggers
                         </h3>
-                        <a class="subcontent-user" href="/">
-                            <img class="subcontent-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="subcontent-userName">
-                                Nguyễn Hồng Sơn
-                            </span>
-                            <span class="subcontent-userBlueCheck">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                        </a>
-                        <a class="subcontent-user" href="/">
-                            <img class="subcontent-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="subcontent-userName">
-                                Đặng Nhã Huy
-                            </span>
-                        </a>
-                        <a class="subcontent-user" href="/">
-                            <img class="subcontent-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="subcontent-userName">
-                                Dương Huỳnh Như
-                            </span>
-                            <span class="subcontent-userBlueCheck">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                        </a>
-                        <a class="subcontent-user" href="/">
-                            <img class="subcontent-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="subcontent-userName">
-                                Nguyễn Thị Thùy Dương
-                            </span>
-                            <span class="subcontent-userBlueCheck">
-                                <i class="fa-solid fa-circle-check"></i>
-                            </span>
-                        </a>
-                        <a class="subcontent-user" href="/">
-                            <img class="subcontent-userAvatar" src="~/Content/Images/default-avatar.jpg" alt="User avatar" />
-                            <span class="subcontent-userName">
-                                Bạch Gia Quốc
-                            </span>
-                        </a>
+                        @foreach(var topUserItem in ViewBag.topUsers)
+                        {
+                            <a class="subcontent-user" href="/">
+                                <img class="subcontent-userAvatar" src="/Uploads/@topUserItem.avatar" alt="User avatar" />
+                                <span class="subcontent-userName">
+                                    @topUserItem.last_name @topUserItem.first_name
+                                </span>
+                                @if (topUserItem.blue_tick)
+                                {
+                                    <span class="subcontent-userBlueCheck">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </span>
+                                }
+                            </a>
+                        }
                     </div>
                     <div class="subcontentItem">
                         <h3 class="subcontent-heading">
@@ -318,3 +115,41 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".blog-actionLikeBtn").click(function (e) {
+                if ($(this).hasClass("liked")) {
+                    fetch('/Blog/Unlike?blogId=' + $(this).data("blog-id"))
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.unliked) {
+                                const prevLikeCount = $("#blog-likeCount-" + $(this).data("blog-id")).text();
+                                $("#blog-likeCount-" + $(this).data("blog-id")).text(parseInt(prevLikeCount) - 1);
+                                $(this).removeClass('liked')
+                            } else {
+                                if (data.toast) {
+                                    toast({ ...data.toast })
+                                }
+                            }
+                        })
+                } else {
+                    fetch('/Blog/Like?blogId=' + $(this).data("blog-id"))
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.liked) {
+                                const prevLikeCount = $("#blog-likeCount-" + $(this).data("blog-id")).text();
+                                $("#blog-likeCount-" + $(this).data("blog-id")).text(parseInt(prevLikeCount) + 1);
+                                $(this).addClass('liked')
+                            } else {
+                                if (data.toast) {
+                                    toast({ ...data.toast })
+                                }
+                            }
+                        })
+                }
+            });
+        });
+    </script>
+}

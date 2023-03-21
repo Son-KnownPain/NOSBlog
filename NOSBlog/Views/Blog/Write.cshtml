@@ -50,6 +50,7 @@
         <div class="form-gr">
             @Html.LabelFor(blog => blog.content, new { @class = "form-label" })
             @Html.TextAreaFor(blog => blog.content, new { @class = "form-input" })
+            @Html.ValidationMessageFor(blog => blog.content, null, new { @class = "form-invalidMessage" })
         </div>
         <button class="form-btn">
             <i class="fa-solid fa-upload"></i>

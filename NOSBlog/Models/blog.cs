@@ -12,6 +12,7 @@ namespace NOSBlog.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class blog
     {
@@ -24,10 +25,16 @@ namespace NOSBlog.Models
     
         public int id { get; set; }
         public Nullable<int> user_id { get; set; }
+        [Required(ErrorMessage = "Title is require")]
+        [MaxLength(255, ErrorMessage = "Max length is 255 characters")]
         public string title { get; set; }
         [DisplayName("Summary")]
+        [Required(ErrorMessage = "Summary is require")]
+        [MaxLength(255, ErrorMessage = "Max length is 255 characters")]
         public string summary { get; set; }
         [DisplayName("Content")]
+        [Required(ErrorMessage = "Content is require")]
+        [MaxLength(4000, ErrorMessage = "Max length is 4000 characters")]
         public string content { get; set; }
         [DisplayName("Thumbnail")]
         public string thumbnail { get; set; }

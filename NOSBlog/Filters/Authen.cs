@@ -11,7 +11,7 @@ namespace NOSBlog.Filters
     {
         public void OnException(ExceptionContext filterContext)
         {
-            if (!UserLogin.IsUserLogin())
+            if (!UserLogin.IsUserLogin)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }

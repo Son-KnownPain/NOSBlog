@@ -1,0 +1,48 @@
+﻿.content-body {
+    margin-top: 24px;
+}
+
+.item {
+    border: 1px solid #999;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.item-img {
+    padding-top: 100%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    background-position: center;
+    background-size: contain;
+}
+
+.item-info {
+    padding: 6px;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.item-name {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.item-price i {
+    color: #ffbf00;
+}
+.item-cp i {
+    color: #007fff;
+}
+
+.item-buyBtn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    padding: 8px 12px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.item-buyBtn:hover {
+    color: #fff;
+    opacity: .8;
+}

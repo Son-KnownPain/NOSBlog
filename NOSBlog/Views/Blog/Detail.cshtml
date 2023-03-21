@@ -17,7 +17,7 @@
             <div class="blog-user">
                 <div class="row">
                     <div class="col-xl-1">
-                        <div class="blog-userAvatar" style="background-image: url(/Uploads/@ViewBag.user.avatar)"></div>
+                        <div class="blog-userAvatar" style="background-image: url('/Uploads/@ViewBag.user.avatar')"></div>
                     </div>
                     <div class="col-xl-11">
                         <div class="blog-userInfo">
@@ -31,7 +31,7 @@
                                 }
                             </h4>
                             <p class="blog-times">
-                                @ViewBag.blog.created_at.ToString("dd-MM-yyyy HH:mm")
+                                @DateTimeHelper.TimeAgo(ViewBag.blog.created_at)
                             </p>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                     <div class="blog-cmtItem" data-user-id="@cmtItem.user_id">
                         <div class="row">
                             <div class="col-xl-3">
-                                <div class="blog-userAvatar" style="background-image: url(/Uploads/@cmtItem.avatar)"></div>
+                                <div class="blog-userAvatar" style="background-image: url('/Uploads/@cmtItem.avatar')"></div>
                             </div>
                             <div class="col-xl-9">
                                 <div class="blog-userInfo">
@@ -101,7 +101,7 @@
                                         }
                                     </h4>
                                     <p class="blog-times">
-                                        @cmtItem.created_at
+                                        @DateTimeHelper.TimeAgo(cmtItem.created_at)
                                     </p>
                                 </div>
                             </div>
@@ -243,7 +243,7 @@
                                                         ${blueTickHtml}
                                                     </h4>
                                                     <p class="blog-times">
-                                                        ${userCmt.created_at} (Vừa xong)
+                                                        Just now
                                                     </p>
                                                 </div>
                                             </div>

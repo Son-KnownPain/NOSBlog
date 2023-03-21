@@ -53,6 +53,10 @@ header .header--wrapper {
     align-items: center;
 }
 
+a.header-logoLink {
+    text-decoration: none;
+}
+
 header .header--logo {
     width: 120px;
 }

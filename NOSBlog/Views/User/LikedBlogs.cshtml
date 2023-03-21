@@ -1,0 +1,48 @@
+﻿@using NOSBlog.Helpers
+@section styles {
+    <link href="~/Content/Css/Pages/LikedBlogs.css" rel="stylesheet" />
+}
+@{
+    ViewBag.Title = "NOS Blog | Liked Blogs";
+}
+
+<div class="container">
+    <a class="page-backBtn" href="/User/Profile">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back To Profile
+    </a>
+    <h1 class="page-heading">
+        <i class="fa-solid fa-thumbs-up"></i>
+        Liked Blogs
+    </h1>
+
+    <p class="page-description">
+        See all the blogs you've liked.
+    </p>
+
+    <div class="content-body">
+        <div class="row">
+            @foreach (var item in ViewBag.likedBlogs)
+            {
+                <div class="col-xl-6">
+                    <div class="blogItem">
+                        <a class="blogItem-title" href="/Blog/Detail?blogId=@item.id">
+                            @item.title
+                        </a>
+                        <img class="blogItem-thumbnail" src="/Uploads/@item.thumbnail" alt="thumbnail" />
+                        <p class="blogItem-summary">
+                            @item.summary
+                        </p>
+                        <p class="blogItem-time">
+                            @DateTimeHelper.TimeAgo(@item.created_at)
+                        </p>
+                    </div>
+                </div>
+            }
+            @if (ViewBag.likedBlogs.Count == 0)
+            {
+                <h1 class="message">You don't like any blog.</h1>
+            }
+        </div>
+    </div>
+</div>

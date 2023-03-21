@@ -1,0 +1,59 @@
+﻿@section styles {
+    <link rel="stylesheet" href="~/Content/Css/Admin/Item/Index.css" />
+}
+@{ 
+    ViewBag.Title = "Item manager";
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        Items Manager
+    </h1>
+    <div class="page-actions">
+        <a class="page-actionItem" href="/admin/item/create">
+            Create New Item
+        </a>
+    </div>
+    <div class="content-body">
+        <table class="itemTable">
+            <thead>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Reduce</th>
+                <th>Quantity</th>
+                <th>Type</th>
+                <th>Collection Points</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                @foreach(var item in ViewBag.items)
+                {
+                    <tr>
+                        <td>@item.name</td>
+                        <td>@item.price</td>
+                        <td>@item.reduce</td>
+                        <td>@item.quantity</td>
+                        <td>@item.type</td>
+                        <td>@item.collection_points</td>
+                        <td>
+                            <img class="itemImg" alt="Item image" src="~/Uploads/Items/@item.image" />
+                        </td>
+                        <td>
+                            <a href="/admin/item/delete" class="actionItem" style="background-color: #a52a2a;">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                            <a href="/admin/item/lock" class="actionItem">
+                                <i class="fa-solid fa-lock"></i>
+                            </a>
+                            <a href="/admin/item/lock" class="actionItem" style="background-color: #d2691e;">
+                                <i class="fa-solid fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+﻿.itemForm-group {
+    margin-top: 16px;
+}
+
+label.itemForm-label, .itemForm-input,
+.itemForm-inputFile, button.itemForm-btn,
+.itemForm-invalidMessage {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+label.itemForm-label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+input.itemForm-input {
+    width: 100%;
+    border: 1px solid #999;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px 12px;
+}
+
+.itemForm-inputFile {
+    width: 100%;
+    background-color: #888;
+    border-radius: 4px;
+    color: #fff;
+    padding: 8px;
+}
+
+.itemForm-invalidMessage {
+    color: red;
+}
+
+button.itemForm-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px 12px;
+    position: relative;
+    left: 100%;
+    transform: translateX(-100%);
+    cursor: pointer;
+}
+button.itemForm-btn:hover {
+    opacity: .8;
+}
