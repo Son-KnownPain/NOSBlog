@@ -1,0 +1,56 @@
+﻿@model NOSBlog.Models.user
+@section styles {
+    <link rel="stylesheet" href="~/Content/Css/Admin/User/Edit.css" />
+}
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-user-pen"></i>
+        Edit User Information
+    </h1>
+    <div class="content-body">
+        @using (Html.BeginForm("Update", "User", new { area = "Admin" }, FormMethod.Post, new { @class = "userForm" }))
+        {
+            @Html.HiddenFor(user => user.id)
+            @Html.HttpMethodOverride("PUT")
+            <div class="userForm-group">
+                @Html.LabelFor(user => user.first_name, new { @class = "userForm-label" })
+                @Html.EditorFor(user => user.first_name, new { htmlAttributes = new { @class = "userForm-input" } })
+                @Html.ValidationMessageFor(user => user.first_name, null, new { @class = "userForm-invalidMessage" })
+            </div>
+            <div class="userForm-group">
+                @Html.LabelFor(user => user.last_name, new { @class = "userForm-label" })
+                @Html.EditorFor(user => user.last_name, new { htmlAttributes = new { @class = "userForm-input" } })
+                @Html.ValidationMessageFor(user => user.last_name, null, new { @class = "userForm-invalidMessage" })
+            </div>
+            <div class="userForm-group">
+                @Html.LabelFor(user => user.username, new { @class = "userForm-label" })
+                @Html.EditorFor(user => user.username, new { htmlAttributes = new { @class = "userForm-input" } })
+                @Html.ValidationMessageFor(user => user.username, null, new { @class = "userForm-invalidMessage" })
+            </div>
+            <div class="userForm-group">
+                @Html.LabelFor(user => user.email, new { @class = "userForm-label" })
+                @Html.EditorFor(user => user.email, new { htmlAttributes = new { @class = "userForm-input" } })
+                @Html.ValidationMessageFor(user => user.email, null, new { @class = "userForm-invalidMessage" })
+            </div>
+            <div class="userForm-group">
+                @Html.LabelFor(user => user.phone, new { @class = "userForm-label" })
+                @Html.EditorFor(user => user.phone, new { htmlAttributes = new { @class = "userForm-input" } })
+                @Html.ValidationMessageFor(user => user.phone, null, new { @class = "userForm-invalidMessage" })
+            </div>
+            <div class="userForm-group">
+                @Html.LabelFor(user => user.coins, new { @class = "userForm-label" })
+                @Html.EditorFor(user => user.coins, new { htmlAttributes = new { @class = "userForm-input" } })
+                @Html.ValidationMessageFor(user => user.coins, null, new { @class = "userForm-invalidMessage" })
+            </div>
+            <div class="userForm-group">
+                <button class="userForm-btn">
+                    Update
+                </button>
+            </div>
+        }
+    </div>
+</div>

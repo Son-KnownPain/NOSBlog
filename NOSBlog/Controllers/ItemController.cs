@@ -32,7 +32,11 @@ namespace NOSBlog.Controllers
             if (buyer == null || itemSell == null) return RedirectToAction("Index");
 
             user_item_collections rdCheck = context.user_item_collections.FirstOrDefault(x => x.user_id == buyer.id && x.item_id == itemSell.id);
-            if (rdCheck != null) return RedirectToAction("Index");
+            if (rdCheck != null)
+            {
+                TempData["Error"] = "You bought that item";
+                return RedirectToAction("Index");
+            }
 
             if (buyer.coins < (itemSell.price - itemSell.reduce))
             {
@@ -44,6 +48,11 @@ namespace NOSBlog.Controllers
                 TempData["Error"] = "Sold out";
                 return RedirectToAction("Index");
             }
+            if (itemSell.@lock)
+            {
+                TempData["Error"] = "This item is no longer for sale";
+                return RedirectToAction("Index");
+            }
 
             // Valid -> handle
             user_item_collections newRd = new user_item_collections();
@@ -52,11 +61,12 @@ namespace NOSBlog.Controllers
             newRd.price = itemSell.price - itemSell.reduce;
             newRd.collection_points = itemSell.collection_points;
 
-            buyer.coins -= itemSell.price - itemSell.reduce;
+            buyer.coins -= (itemSell.price - itemSell.reduce);
             buyer.collection_points += itemSell.collection_points;
 
             itemSell.quantity -= 1;
 
+            context.user_item_collections.Add(newRd);
             context.SaveChanges();
 
             TempData["Success"] = "Successfully buy item";

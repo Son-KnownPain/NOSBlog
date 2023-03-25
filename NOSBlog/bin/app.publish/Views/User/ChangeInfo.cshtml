@@ -1,0 +1,76 @@
+﻿@model NOSBlog.Models.user
+
+@section styles {
+    <link href="~/Content/Css/Pages/ChangeInfo.css" rel="stylesheet" />
+}
+@{ 
+    ViewBag.Title = "NOS Blog | Change Information";
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-user-gear"></i>
+        Change your information
+    </h1>
+
+    <div class="content-body">
+        @using(Html.BeginForm("UpdateInfo", "User", FormMethod.Post, new { @class = "updateForm" }))
+        {
+        @Html.HttpMethodOverride("PUT")
+        @Html.HiddenFor(u => u.id)
+            
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="form-box">
+                    @Html.LabelFor(u => u.first_name, new { @class = "form-label" })
+                    @Html.EditorFor(u => u.first_name, new { htmlAttributes = new { @class = "form-input", placeHolder = "Enter first name" } })
+                    @Html.ValidationMessageFor(u => u.first_name, null, new { @class = "form-invalidMessage" })
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="form-box">
+                    @Html.LabelFor(u => u.last_name, new { @class = "form-label" })
+                    @Html.EditorFor(u => u.last_name, new { htmlAttributes = new { @class = "form-input", placeHolder = "Enter last name" } })
+                    @Html.ValidationMessageFor(u => u.last_name, null, new { @class = "form-invalidMessage" })
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="form-box">
+                    @Html.LabelFor(u => u.username, new { @class = "form-label" })
+                    @Html.EditorFor(u => u.username, new { htmlAttributes = new { @class = "form-input", placeHolder = "Enter username" } })
+                    @Html.ValidationMessageFor(u => u.username, null, new { @class = "form-invalidMessage" })
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="form-box">
+                    @Html.LabelFor(u => u.email, new { @class = "form-label" })
+                    @Html.EditorFor(u => u.email, new { htmlAttributes = new { @class = "form-input", placeHolder = "Enter email" } })
+                    @Html.ValidationMessageFor(u => u.email, null, new { @class = "form-invalidMessage" })
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="form-box">
+                    @Html.LabelFor(u => u.phone, new { @class = "form-label" })
+                    @Html.EditorFor(u => u.phone, new { htmlAttributes = new { @class = "form-input", placeHolder = "Enter phone" } })
+                    @Html.ValidationMessageFor(u => u.phone, null, new { @class = "form-invalidMessage" })
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="form-box">
+                    @Html.LabelFor(u => u.password, new { @class = "form-label" })
+                    @Html.PasswordFor(u => u.password, new { @class = "form-input", placeHolder = "You must enter current password or new password to update your information" })
+                    @Html.ValidationMessageFor(u => u.password, null, new { @class = "form-invalidMessage" })
+                </div>
+            </div>
+            <div class="col-xl-12">
+                <div class="form-box">
+                    <button class="form-btn">
+                        <i class="fa-solid fa-user-pen"></i>
+                        Update
+                    </button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

@@ -214,6 +214,8 @@ namespace NOSBlog.Controllers
             userToUpdate.password = Crypto.HashPassword(userData.password);
             userToUpdate.updated_at = DateTime.Now;
             context.SaveChanges();
+
+            UserLogin.Update(userToUpdate);
             return Redirect("/User/Profile");
         }
 
@@ -225,10 +227,58 @@ namespace NOSBlog.Controllers
             int userId = UserLogin.GetUserLogin.id;
             NOSBlogEntities context = new NOSBlogEntities();
             List<Int32> listItemId = context.user_item_collections.Where(x => x.user_id == userId).Select(x => x.item_id).ToList();
-            List<item> items = context.items.Where(item => listItemId.Contains(item.id)).ToList();
+            List<UserItemViewModel> items = (from i in context.items
+                                             join uic in context.user_item_collections on i.id equals uic.item_id
+                                             select new UserItemViewModel
+                                             {
+                                                 id = i.id,
+                                                 name = i.name,
+                                                 price = uic.price,
+                                                 image = i.image,
+                                                 collection_points = uic.collection_points,
+                                             }).ToList();
 
             ViewBag.items = items;
 
+            return View();
+        }
+
+        // GET /User/ViewItems
+        [HttpGet]
+        public ActionResult ViewItems(int? userId)
+        {
+            if (userId == null) return RedirectToAction(Request.UrlReferrer == null ? "/" : Request.UrlReferrer.ToString());
+            NOSBlogEntities context = new NOSBlogEntities();
+            List<Int32> listItemId = context.user_item_collections.Where(x => x.user_id == userId).Select(x => x.item_id).ToList();
+            List<UserItemViewModel> items = (from i in context.items
+                                             join uic in context.user_item_collections on i.id equals uic.item_id
+                                             where listItemId.Contains(i.id)
+                                             select new UserItemViewModel
+                                             {
+                                                 id = i.id,
+                                                 name = i.name,
+                                                 price = uic.price,
+                                                 image = i.image,
+                                                 collection_points = uic.collection_points,
+                                             }).ToList();
+
+            ViewBag.items = items;
+
+            return View();
+        }
+
+        // GET /User/Info
+        [HttpGet]
+        public ActionResult Info(int? userId)
+        {
+            if (UserLogin.IsUserLogin && userId == UserLogin.GetUserLogin.id) return RedirectToAction("Profile");
+            if (userId == null) return Redirect(Request.UrlReferrer == null ? "/" : Request.UrlReferrer.ToString());
+            NOSBlogEntities context = new NOSBlogEntities();
+            user userLogin = context.users.FirstOrDefault(user => user.id == userId);
+            if (userLogin == null) return RedirectToAction("Login");
+            List<blog> blogsOfUser = context.blogs.Where(blog => blog.user_id == userLogin.id).OrderByDescending(blog => blog.id).ToList();
+            ViewBag.user = userLogin;
+            ViewBag.blogs = blogsOfUser;
             return View();
         }
     }

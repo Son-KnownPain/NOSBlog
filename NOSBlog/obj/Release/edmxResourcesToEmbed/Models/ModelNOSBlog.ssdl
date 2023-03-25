@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NOSBlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="blogs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="summary" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="content" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="thumbnail" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="like_count" Type="int" Nullable="false" />
+    <Property Name="comment_count" Type="int" Nullable="false" />
+    <Property Name="lock" Type="bit" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="blog_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="content" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="like_count" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="images">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="url" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="items">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="reduce" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="type" Type="tinyint" Nullable="false" />
+    <Property Name="collection_points" Type="int" Nullable="false" />
+    <Property Name="lock" Type="bit" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user_item_collections">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="item_id" Type="int" Nullable="false" />
+    <Property Name="collection_points" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user_like_blogs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="blog_id" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user_like_comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="comment_id" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="last_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="role" Type="int" Nullable="false" />
+    <Property Name="avatar" Type="varchar" MaxLength="255" />
+    <Property Name="blue_tick" Type="bit" Nullable="false" />
+    <Property Name="coins" Type="int" Nullable="false" />
+    <Property Name="collection_points" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="updated_at" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__blogs__user_id__2F10007B">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="blogs" Type="Self.blogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="blogs">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comments__blog_i__37A5467C">
+    <End Role="blogs" Type="Self.blogs" Multiplicity="0..1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="blogs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="blog_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comments__user_i__38996AB5">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_item__item___7B5B524B">
+    <End Role="items" Type="Self.items" Multiplicity="1" />
+    <End Role="user_item_collections" Type="Self.user_item_collections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="items">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_item_collections">
+        <PropertyRef Name="item_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_item__user___7A672E12">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="user_item_collections" Type="Self.user_item_collections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_item_collections">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_like__blog___656C112C">
+    <End Role="blogs" Type="Self.blogs" Multiplicity="1" />
+    <End Role="user_like_blogs" Type="Self.user_like_blogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="blogs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_like_blogs">
+        <PropertyRef Name="blog_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_like__comme__6A30C649">
+    <End Role="comments" Type="Self.comments" Multiplicity="1" />
+    <End Role="user_like_comments" Type="Self.user_like_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comments">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_like_comments">
+        <PropertyRef Name="comment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_like__user___6477ECF3">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="user_like_blogs" Type="Self.user_like_blogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_like_blogs">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user_like__user___693CA210">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="user_like_comments" Type="Self.user_like_comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_like_comments">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NOSBlogModelStoreContainer">
+    <EntitySet Name="blogs" EntityType="Self.blogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="images" EntityType="Self.images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="items" EntityType="Self.items" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_item_collections" EntityType="Self.user_item_collections" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_like_blogs" EntityType="Self.user_like_blogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_like_comments" EntityType="Self.user_like_comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__blogs__user_id__2F10007B" Association="Self.FK__blogs__user_id__2F10007B">
+      <End Role="users" EntitySet="users" />
+      <End Role="blogs" EntitySet="blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comments__blog_i__37A5467C" Association="Self.FK__comments__blog_i__37A5467C">
+      <End Role="blogs" EntitySet="blogs" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comments__user_i__38996AB5" Association="Self.FK__comments__user_i__38996AB5">
+      <End Role="users" EntitySet="users" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_item__item___7B5B524B" Association="Self.FK__user_item__item___7B5B524B">
+      <End Role="items" EntitySet="items" />
+      <End Role="user_item_collections" EntitySet="user_item_collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_item__user___7A672E12" Association="Self.FK__user_item__user___7A672E12">
+      <End Role="users" EntitySet="users" />
+      <End Role="user_item_collections" EntitySet="user_item_collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_like__blog___656C112C" Association="Self.FK__user_like__blog___656C112C">
+      <End Role="blogs" EntitySet="blogs" />
+      <End Role="user_like_blogs" EntitySet="user_like_blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_like__comme__6A30C649" Association="Self.FK__user_like__comme__6A30C649">
+      <End Role="comments" EntitySet="comments" />
+      <End Role="user_like_comments" EntitySet="user_like_comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_like__user___6477ECF3" Association="Self.FK__user_like__user___6477ECF3">
+      <End Role="users" EntitySet="users" />
+      <End Role="user_like_blogs" EntitySet="user_like_blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user_like__user___693CA210" Association="Self.FK__user_like__user___693CA210">
+      <End Role="users" EntitySet="users" />
+      <End Role="user_like_comments" EntitySet="user_like_comments" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

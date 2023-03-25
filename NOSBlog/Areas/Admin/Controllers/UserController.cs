@@ -17,7 +17,7 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            // if (!UserLogin.IsAdmin) return Redirect("/");
+            if (!UserLogin.IsAdmin) return Redirect("/");
             List<user> allUsers = context.users.ToList();
             ViewBag.users = allUsers;
             return View();
@@ -27,7 +27,7 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int? userId)
         {
-            // if (!UserLogin.IsAdmin) return Redirect("/");
+            if (!UserLogin.IsAdmin) return Redirect("/");
             if (userId == null) return RedirectToAction("Index");
             user userEdit = context.users.FirstOrDefault(user => user.id == userId);
             if (userEdit == null) return RedirectToAction("Index");
@@ -38,7 +38,7 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpPut]
         public ActionResult Update(EditUserViewModel userData)
         {
-            // if (!UserLogin.IsAdmin) return Redirect("/");
+            if (!UserLogin.IsAdmin) return Redirect("/");
             if (!ModelState.IsValid) return View("Edit");
             user userUpdated = context.users.FirstOrDefault(user => user.id == userData.id);
             if (userUpdated == null) return Redirect(Request.UrlReferrer.ToString());
@@ -57,7 +57,7 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Tick(int? userId)
         {
-            // if (!UserLogin.IsAdmin) return Redirect("/");
+            if (!UserLogin.IsAdmin) return Redirect("/");
             if (userId == null) return RedirectToAction("Index");
             user userHasTick = context.users.FirstOrDefault(user => user.id == userId);
             if (userHasTick == null) return RedirectToAction("Index");
@@ -77,7 +77,7 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Role(int? userId)
         {
-            // if (!UserLogin.IsAdmin) return Redirect("/");
+            if (!UserLogin.IsAdmin) return Redirect("/");
             if (userId == null) return RedirectToAction("Index");
             user userChangeRole = context.users.FirstOrDefault(user => user.id == userId);
             if (userChangeRole == null && UserLogin.GetUserLogin.role != UserLogin.AdminRole) return RedirectToAction("Index");
@@ -90,7 +90,7 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpPut]
         public ActionResult ChangeRole(int? id, int role)
         {
-            // if (!UserLogin.IsAdmin) return Redirect("/");
+            if (!UserLogin.IsAdmin) return Redirect("/");
             if (id == null) return RedirectToAction("Index");
             user userChangeRole = context.users.FirstOrDefault(user => user.id == id);
             if (userChangeRole == null && UserLogin.GetUserLogin.role != UserLogin.AdminRole) return RedirectToAction("Index");
@@ -112,10 +112,17 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Delete(int? userId)
         {
-            // if (!UserLogin.IsAdmin) return Redirect("/");
+            if (!UserLogin.IsAdmin) return Redirect("/");
             if (userId == null) return RedirectToAction("Index");
             user userDelete = context.users.FirstOrDefault(user => user.id == userId);
             if (userDelete == null) return RedirectToAction("Index");
+
+            // Remove relationship
+            context.blogs.RemoveRange(context.blogs.Where(record => record.user_id == userId));
+            context.comments.RemoveRange(context.comments.Where(record => record.user_id == userId));
+            context.user_like_blogs.RemoveRange(context.user_like_blogs.Where(record => record.user_id == userId));
+            context.user_like_comments.RemoveRange(context.user_like_comments.Where(record => record.user_id == userId));
+            context.user_item_collections.RemoveRange(context.user_item_collections.Where(record => record.user_id == userId));
 
             String uploadFolderPath = Server.MapPath("~/Uploads");
             String oldFileName = userDelete.avatar;

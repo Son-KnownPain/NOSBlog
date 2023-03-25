@@ -1,0 +1,52 @@
+﻿.userForm-group {
+    margin-top: 16px;
+}
+
+label.userForm-label, .userForm-input,
+.userForm-inputFile, button.userForm-btn,
+.userForm-invalidMessage {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+label.userForm-label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+input.userForm-input {
+    width: 100%;
+    border: 1px solid #999;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px 12px;
+}
+
+.userForm-inputFile {
+    width: 100%;
+    background-color: #888;
+    border-radius: 4px;
+    color: #fff;
+    padding: 8px;
+}
+
+.userForm-invalidMessage {
+    color: red;
+}
+
+button.userForm-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px 12px;
+    position: relative;
+    left: 100%;
+    transform: translateX(-100%);
+    cursor: pointer;
+}
+
+button.userForm-btn:hover {
+    opacity: .8;
+}

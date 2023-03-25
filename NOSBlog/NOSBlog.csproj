@@ -129,6 +129,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommentController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
@@ -181,6 +183,7 @@
     <Compile Include="Models\user.cs">
       <DependentUpon>ModelNOSBlog.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserItemViewModel.cs" />
     <Compile Include="Models\user_item_collections.cs">
       <DependentUpon>ModelNOSBlog.tt</DependentUpon>
     </Compile>
@@ -198,13 +201,17 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Css\Admin\App.css" />
+    <Content Include="Content\Css\Admin\Blog\Index.css" />
+    <Content Include="Content\Css\Admin\Comment\Index.css" />
     <Content Include="Content\Css\Admin\Item\Create.css" />
     <Content Include="Content\Css\Admin\Item\Index.css" />
     <Content Include="Content\Css\Admin\User\Edit.css" />
     <Content Include="Content\Css\Admin\User\Index.css" />
+    <Content Include="Content\Css\Message\messages.css" />
     <Content Include="Content\Css\Pages\AboutUs.css" />
     <Content Include="Content\Css\Pages\BlogDetail.css" />
     <Content Include="Content\Css\Pages\ChangeInfo.css" />
+    <Content Include="Content\Css\Pages\Home\Search.css" />
     <Content Include="Content\Css\Pages\Index.css" />
     <Content Include="Content\Css\Pages\Item\Index.css" />
     <Content Include="Content\Css\Pages\LikedBlogs.css" />
@@ -214,9 +221,13 @@
     <Content Include="Content\Css\Pages\Register.css" />
     <Content Include="Content\Css\Pages\Security.css" />
     <Content Include="Content\Css\Pages\WriteBlog.css" />
+    <Content Include="Content\Images\default-avatar.jpg" />
+    <Content Include="Content\Images\favicon.png" />
+    <Content Include="Content\Images\Logo-nobg.png" />
     <Content Include="Content\Images\Logo.png" />
     <Content Include="Content\Class-available.css" />
-    <Content Include="Content\Images\ThuyDuong.jpg" />
+    <Content Include="Content\Images\test.jpg" />
+    <Content Include="Content\Js\Message\messages.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -252,7 +263,11 @@
     <Content Include="Areas\Admin\Views\Item\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\Role.cshtml" />
+    <Content Include="Areas\Admin\Views\Item\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Comment\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <None Include="Scripts\jquery-3.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -263,6 +278,22 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Uploads\05032023151207-127-thuyduong.jpg" />
+    <Content Include="Uploads\17032023195254-5254_-lisamac.jpg" />
+    <Content Include="Uploads\17032023200142-142_-63f81c57d8c7d.jpg" />
+    <Content Include="Uploads\17032023200614-614-M3.2022%286%29.jpg" />
+    <Content Include="Uploads\17032023203754-3754_img1416372826..jpg" />
+    <Content Include="Uploads\17032023205334-5334_img2009538827.jpg" />
+    <Content Include="Uploads\17032023205953-5953_blog-img1693311142.png" />
+    <Content Include="Uploads\17032023210841-841_blog-img1306805593.png" />
+    <Content Include="Uploads\17032023211548-1548_blog-img1956832815.jpg" />
+    <Content Include="Uploads\17032023212028-2028_blog-img1412746970.jpg" />
+    <Content Include="Uploads\17032023212433-2433_blog-img745860832.jpeg" />
+    <Content Include="Uploads\17032023212650-2650_blog-img1232423803.jpg" />
+    <Content Include="Uploads\17032023213456-3456_blog-img2090411477.jpg" />
+    <Content Include="Uploads\17032023213920-3920_blog-img1283555922.jpg" />
+    <Content Include="Uploads\22032023105201-521-wp7992445.jpg" />
+    <Content Include="Uploads\default-avatar.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -277,8 +308,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Partials\_Header.cshtml" />
     <Content Include="Views\Shared\Partials\_Footer.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Home\Security.cshtml" />
@@ -291,11 +320,13 @@
     <Content Include="Views\User\ChangeInfo.cshtml" />
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\User\MyItems.cshtml" />
+    <Content Include="Views\User\Info.cshtml" />
+    <Content Include="Views\User\ViewItems.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Content\Js\" />
     <Folder Include="Uploads\Items\" />
     <Folder Include="Views\Comment\" />
   </ItemGroup>

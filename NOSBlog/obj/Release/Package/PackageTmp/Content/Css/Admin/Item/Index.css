@@ -1,0 +1,54 @@
+﻿.content-body, .page-actions {
+    margin-top: 22px;
+}
+
+.page-actionItem {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 12px 16px;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+}
+.page-actionItem:hover {
+    color: #fff;
+    opacity: .8;
+}
+
+table.itemTable {
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #999;
+    padding: 12px;
+    font-size: 1.6rem;
+}
+
+td {
+    font-weight: 500;
+}
+
+.itemImg {
+    width: 150px;
+}
+
+.actionItem {
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    background-color: #999;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+.actionItem:not(:first-child) {
+    margin-left: 6px;
+}
+
+.actionItem:hover {
+    color: #333;
+    opacity: .8;
+}

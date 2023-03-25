@@ -1,0 +1,147 @@
+﻿@model NOSBlog.Models.user
+@section styles {
+    <link href="~/Content/Css/Pages/Profile.css" rel="stylesheet" />
+}
+
+@{
+    ViewBag.Title = "NOS Blog - Your Profile";
+}
+
+@if (TempData.ContainsKey("PostNewBlog"))
+{
+    try
+    {
+        @section toast {
+            <script>
+            toast({
+                title: 'Successfully post new blog',
+                message: '@TempData["PostNewBlog"].ToString()',
+                type: 'success'
+            })
+            </script>
+        }
+    }
+    catch (Exception e)
+    {
+
+    }
+}
+@if (TempData.ContainsKey("RemoveBlog"))
+{
+    try
+    {
+        @section toast {
+            <script>
+            toast({
+                title: 'Successfully remove blog',
+                message: '@TempData["RemoveBlog"].ToString()',
+                type: 'success'
+            })
+            </script>
+        }
+    }
+    catch (Exception e)
+    {
+
+    }
+}
+
+<div class="container">
+    <div class="content-body">
+        <div class="row">
+            <div class="col-xl-2">
+                <img class="user-avatar" src="/Uploads/@ViewBag.user.avatar" alt="User avatar" />
+            </div>
+            <div class="col-xl-5">
+                <h1 class="user-name">
+                    @ViewBag.user.last_name @ViewBag.user.first_name
+                    @if (ViewBag.user.blue_tick)
+                    {
+                        <span class="user-tick">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+                    }
+                </h1>
+                <p class="user-column">
+                    <i class="fa-solid fa-star user-starIcon"></i>
+                    Collection points (Stars): <span class="user-columnValue">@ViewBag.user.collection_points</span>
+                </p>
+                <p class="user-column">
+                    <i class="fa-regular fa-id-card user-usernameIcon"></i>
+                    Username:
+                    <span class="user-columnValue">@@@ViewBag.user.username</span>
+                </p>
+            </div>
+            <div class="col-xl-5">
+                <div class="user-actions">
+                    <a class="user-linkAction" href="/User/ViewItems?userId=@ViewBag.user.id">
+                        View This User's Items
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h1 class="page-heading">
+                Blogs Posted
+            </h1>
+            <p class="page-description">
+                Here are the blogs that you have posted
+            </p>
+            <div class="user-blogsBox">
+                @foreach (var blog in ViewBag.blogs)
+                {
+                    <div class="user-blogItem">
+                        <a class="blogItem-title" href="/Blog/Detail?blogId=@blog.id">
+                            @blog.title
+                        </a>
+                        <p class="blogItem-summary">
+                            @blog.summary
+                        </p>
+                        <p class="blogItem-time">
+                            @blog.created_at.ToString("dd-MM-yyyy HH:mm")
+                        </p>
+                        <div class="blogItem-interactBox">
+                            <span class="blogItem-interactItem">
+                                <i class="fa-regular fa-heart"></i>
+                                @blog.like_count
+                            </span>
+                            <span class="blogItem-interactItem">
+                                <i class="fa-regular fa-comment"></i>
+                                @blog.comment_count
+                            </span>
+                        </div>
+                    </div>
+                }
+                @if (ViewBag.blogs.Count == 0)
+                {
+                    <p class="blog-message">
+                        This user haven't posted any blog yet!
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        const avatarFile = document.getElementById('avatarFile');
+        avatarFile.oninput = function (e) {
+            if (avatarFile.value !== "") {
+                document.getElementById('avatarFileLabel').classList.add('selected');
+                document.getElementById('avatarFileLabel').textContent = 'Selected';
+                document.getElementById('avatarFileButton').style.display = 'inline-block';
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".blogItem-ownerActionItem").click(function (e) {
+                const isRemove = confirm("You sure do it");
+                if (!isRemove) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

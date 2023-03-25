@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "NOS Blog | View User's Items";
+}
+@section styles{
+    <link rel="stylesheet" href="~/Content/Css/Pages/Item/Index.css" />
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        View User's Items
+    </h1>
+    <div class="content-body">
+        <div class="items">
+            <div class="row">
+                @if (ViewBag.items.Count == 0)
+                {
+                    <p class="alert-warning" style="font-size: 1.6rem; font-weight: 500;">
+                        You hasn't any item
+                    </p>
+                }
+                @foreach (var item in ViewBag.items)
+                {
+                    <div class="col-xl-2">
+                        <div class="item">
+                            <div class="item-img" style="background-image: url('/Uploads/Items/@item.image')"></div>
+                            <div class="item-info">
+                                <h3 class="item-name">@item.name</h3>
+                                <p class="item-priceBox">
+                                    <span class="item-price">
+                                        <i class="fa-solid fa-coins"></i>
+                                        @item.price
+                                    </span>
+                                    <span class="item-cp">
+                                        <i class="fa-solid fa-star"></i>
+                                        @item.collection_points
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

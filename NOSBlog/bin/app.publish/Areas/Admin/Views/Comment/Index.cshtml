@@ -1,0 +1,83 @@
+﻿@using NOSBlog.Helpers
+@section styles {
+    <link rel="stylesheet" href="~/Content/Css/Admin/Comment/Index.css" />
+}
+@{ 
+    ViewBag.Title = "Comments Manage";
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-comments"></i>
+        Comments Manage
+    </h1>
+
+    <div class="content-body">
+        <div class="row">
+            @foreach (var cmtItem in ViewBag.comments)
+            {
+                <div class="col-xl-4">
+                    <div class="comment-cmtItem" data-user-id="@cmtItem.user_id">
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <a href="/User/Info?userId=@cmtItem.user_id" class="comment-userAvatar" style="background-image: url('/Uploads/@cmtItem.avatar')"></a>
+                            </div>
+                            <div class="col-xl-9">
+                                <div class="comment-userInfo">
+                                    <a href="/User/Info?userId=@cmtItem.user_id" class="comment-userName">
+                                        @cmtItem.fullname
+                                        @if (cmtItem.blue_tick)
+                                        {
+                                            <span class="comment-userTick">
+                                                <i class="fa-solid fa-circle-check"></i>
+                                            </span>
+                                        }
+                                    </a>
+                                    <p class="comment-times">
+                                        @DateTimeHelper.TimeAgo(cmtItem.created_at)
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="comment-cmtContent">
+                                    @cmtItem.content
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                @if (CommentHelper.IsLikeComment(cmtItem.comment_id))
+                                {
+                                    <span class="comment-userCmtLikeBtn liked" data-comment-id="@cmtItem.comment_id">
+                                        <i class="fa-solid fa-heart"></i>
+                                        <span class="commentLikeCount-@cmtItem.comment_id">
+                                            @cmtItem.like_count
+                                        </span>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="comment-userCmtLikeBtn" data-comment-id="@cmtItem.comment_id">
+                                        <i class="fa-regular fa-heart"></i>
+                                        <span class="commentLikeCount-@cmtItem.comment_id">
+                                            @cmtItem.like_count
+                                        </span>
+                                    </span>
+                                }
+                                <a class="comment-userRemoveCmtBtn" href="/Admin/Comment/Delete?commentId=@cmtItem.comment_id">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(".comment-userRemoveCmtBtn").click(e => {
+            if (!confirm('Are you sure you want to delete this comment')) e.preventDefault();
+        })
+    </script>
+}

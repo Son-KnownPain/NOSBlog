@@ -1,0 +1,167 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* CSS Variables */
+:root {
+    --primary-color: #00a2e8;
+    --header-height: 66px;
+    --text-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: #b2beb5;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    opacity: .6;
+}
+
+header.header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 4px 7px rgb(0 0 0 / 10%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+header .header--wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a.header-logoLink {
+    text-decoration: none;
+}
+
+header .header--logo {
+    width: 120px;
+}
+
+header .header--navItem {
+    color: var(--text-color);
+    padding: 0 16px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+header .header--actionItem {
+    color: var(--text-color);
+    padding: 0 8px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+header .header--actionItem:hover, header .header--navItem:hover {
+    color: var(--primary-color);
+}
+
+.content {
+    margin-top: calc(var(--header-height) + 12px);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.content h1.page-heading {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #333;
+    padding-top: 16px;
+}
+
+.content p.page-description {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #333;
+    margin-top: 16px;
+}
+
+footer.footer {
+    display: flex;
+    align-items: center;
+    background-color: #181821;
+    font-size: 1.6rem;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer-colWrapper {
+    padding: 0 28px;
+}
+
+footer .footer-logo {
+    width: 126px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+footer h4.footer-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    height: 63px;
+    line-height: 63px;
+    margin: 0;
+}
+
+footer p.footer-infoParagraph {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #999;
+    margin-top: 22px;
+}
+
+footer a.footer-link {
+    text-decoration: none;
+    color: #999;
+    transition: padding-left linear .1s;
+}
+
+footer a.footer-link:hover {
+    color: #fff;
+    padding-left: 4px;
+}
+
+footer.footer p.copyright {
+    padding-top: 36px;
+    margin: 0;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer .footer-socialItem {
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 16px;
+    font-size: 2.2rem;
+}

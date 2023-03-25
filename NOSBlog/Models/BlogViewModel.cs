@@ -9,6 +9,7 @@ namespace NOSBlog.Models
     {
         // blog data
         public int id { get; set; }
+        public int user_id { get; set; }
         public string title { get; set; }
         public string summary { get; set; }
         public string thumbnail { get; set; }

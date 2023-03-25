@@ -1,0 +1,76 @@
+﻿@model NOSBlog.Models.item
+@section styles {
+    <link rel="stylesheet" href="~/Content/Css/Admin/Item/Create.css" />
+}
+@{
+    ViewBag.Title = "Edit Item";
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-plus"></i>
+        Edit Item
+    </h1>
+    <div class="content-body">
+        @using (Html.BeginForm("Update", "Item", new { area = "Admin" }, FormMethod.Post, new { @class = "itemForm", enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(item => item.id)
+            @Html.HttpMethodOverride("PUT")
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="itemForm-group">
+                        @Html.LabelFor(item => item.name, new { @class = "itemForm-label" })
+                        @Html.EditorFor(item => item.name, new { htmlAttributes = new { @class = "itemForm-input", placeHolder = "Enter name" } })
+                        @Html.ValidationMessageFor(item => item.name, null, new { @class = "itemForm-invalidMessage" })
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="itemForm-group">
+                        @Html.LabelFor(item => item.price, new { @class = "itemForm-label" })
+                        @Html.EditorFor(item => item.price, new { htmlAttributes = new { @class = "itemForm-input", placeHolder = "Enter price" } })
+                        @Html.ValidationMessageFor(item => item.price, null, new { @class = "itemForm-invalidMessage" })
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="itemForm-group">
+                        @Html.LabelFor(item => item.reduce, new { @class = "itemForm-label" })
+                        @Html.EditorFor(item => item.reduce, new { htmlAttributes = new { @class = "itemForm-input", placeHolder = "Enter reduce" } })
+                        @Html.ValidationMessageFor(item => item.reduce, null, new { @class = "itemForm-invalidMessage" })
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="itemForm-group">
+                        @Html.LabelFor(item => item.quantity, new { @class = "itemForm-label" })
+                        @Html.EditorFor(item => item.quantity, new { htmlAttributes = new { @class = "itemForm-input", placeHolder = "Enter quantity" } })
+                        @Html.ValidationMessageFor(item => item.quantity, null, new { @class = "itemForm-invalidMessage" })
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="itemForm-group">
+                        @Html.LabelFor(item => item.type, new { @class = "itemForm-label" })
+                        @Html.EditorFor(item => item.type, new { htmlAttributes = new { @class = "itemForm-input", placeHolder = "Enter type" } })
+                        @Html.ValidationMessageFor(item => item.type, null, new { @class = "itemForm-invalidMessage" })
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="itemForm-group">
+                        @Html.LabelFor(item => item.collection_points, new { @class = "itemForm-label" })
+                        @Html.EditorFor(item => item.collection_points, new { htmlAttributes = new { @class = "itemForm-input", placeHolder = "Enter collection points" } })
+                        @Html.ValidationMessageFor(item => item.collection_points, null, new { @class = "itemForm-invalidMessage" })
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="itemForm-group">
+                        @Html.LabelFor(item => item.image, new { @class = "itemForm-label" })
+                        <input type="file" name="imageFile" class="itemForm-inputFile" />
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="itemForm-group">
+                        <button class="itemForm-btn">Update</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

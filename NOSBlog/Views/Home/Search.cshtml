@@ -1,0 +1,195 @@
+﻿@using NOSBlog.Helpers
+@{ 
+    ViewBag.Title = "NOS Blog | Search";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Content/Css/Pages/Home/Search.css" />
+}
+
+<div class="container">
+    <h1 class="page-heading">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Search
+    </h1>
+    <p class="page-description">
+        You can find blogs, users or items
+    </p>
+
+    <div class="searchFilterBox">
+        @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { @class = "searchForm" }))
+        {
+            <div class="filter">
+                <div class="checkboxItem">
+                    <input type="checkbox" name="includes" value="blogs" id="blogCheckbox" checked />
+                    <label for="blogCheckbox">Blogs</label>
+                </div>
+                <div class="checkboxItem">
+                    <input type="checkbox" name="includes" value="users" id="userCheckbox" checked />
+                    <label for="userCheckbox">Users</label>
+                </div>
+                <div class="checkboxItem">
+                    <input type="checkbox" name="includes" value="items" id="itemCheckbox" checked />
+                    <label for="itemCheckbox">Items</label>
+                </div>
+            </div>
+            <div class="searchInputBox">
+                <input class="searchInput" type="text" name="searchValue" placeholder="Enter your keyword..." />
+                <button class="searchBtn">Search</button>
+            </div>
+        }
+    </div>
+
+    <div class="searchResultBox">
+        @if (ViewBag.blogs != null && ViewBag.blogs.Count != 0)
+        {
+            <div class="blogsResult resultItemBox">
+                <h1 class="result-title">Blogs</h1>
+                <div class="blogsResultList">
+                    <div class="row">
+                        @foreach (var blog in ViewBag.blogs)
+                        {
+                            <div class="col-xl-6">
+                                <div class="blogResultItem">
+                                    <div class="row">
+                                        <div class="col-xl-8">
+                                            <a class="blog-title" href="/Blog/Detail?blogId=@blog.id">
+                                                @blog.title
+                                            </a>
+                                            <p class="blog-summary">
+                                                @blog.summary
+                                            </p>
+                                            <p class="blog-postTime">
+                                                @DateTimeHelper.TimeAgo(blog.created_at)
+                                            </p>
+                                            <div class="blog-interacts">
+                                                <span class="blog-likes">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                    <span id="blog-likeCount-@blog.id">
+                                                        @blog.like_count
+                                                    </span>
+                                                </span>
+                                                <span class="blog-comments">
+                                                    <i class="fa-regular fa-comment"></i>
+                                                    @blog.comment_count
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4">
+                                            <img class="blog-img" src="/Uploads/@blog.thumbnail" alt="Hinh anh blog" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else if (ViewBag.blogs != null && ViewBag.blogs.Count == 0)
+        {
+            <div class="blogsResult resultItemBox">
+                <h1 class="result-title">Blogs</h1>
+                <p class="noResultMessage">No result</p>
+            </div>
+        }
+        @* ---------------------------- *@
+        @if (ViewBag.users != null && ViewBag.users.Count != 0)
+        {
+            <div class="blogsResult resultItemBox">
+                <h1 class="result-title">Users</h1>
+                <div class="row">
+                    @foreach (var user in ViewBag.users)
+                    {
+                        <div class="col-xl-4">
+                            <div class="userItem">
+                                <div class="row">
+                                    <div class="col-xl-2">
+                                        <a href="/User/Info?userId=@user.id" class="user-avatar" style="background-image: url('/Uploads/@user.avatar')"></a>
+                                    </div>
+                                    <div class="col-xl-10">
+                                        <a class="user-name" href="/User/Info?userId=@user.id">
+                                            @user.last_name @user.first_name
+                                            @if (user.blue_tick)
+                                            {
+                                                <span class="user-blueTick">
+                                                    <i class="fa-solid fa-circle-check"></i>
+                                                </span>
+                                            }
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else if (ViewBag.users != null && ViewBag.users.Count == 0)
+        {
+            <div class="blogsResult resultItemBox">
+                <h1 class="result-title">Users</h1>
+                <p class="noResultMessage">No result</p>
+            </div>
+        }
+        @* ---------------------------- *@
+        @if (ViewBag.items != null && ViewBag.items.Count != 0)
+        {
+            <div class="blogsResult resultItemBox">
+                <h1 class="result-title">Items</h1>
+                <div class="row">
+                    @foreach (var item in ViewBag.items)
+                    {
+                        <div class="col-xl-2">
+                            <div class="item">
+                                <div class="item-img" style="background-image: url('/Uploads/Items/@item.image')"></div>
+                                <div class="item-info">
+                                    <h3 class="item-name">@item.name</h3>
+                                    <p class="item-priceBox">
+                                        <span class="item-price">
+                                            <i class="fa-solid fa-coins"></i>
+                                            @ItemHelper.MinusOne(item.price, item.reduce)
+                                        </span>
+                                        <span class="item-cp">
+                                            <i class="fa-solid fa-star"></i>
+                                            @item.collection_points
+                                        </span>
+                                    </p>
+                                    @if (!item.@lock)
+                                    {
+                                        if (ItemHelper.IsBought(item.id))
+                                        {
+                                            <a href="#" class="item-buyBtn disabled">
+                                                Bought
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Item/Buy?itemId=@item.id" class="item-buyBtn">
+                                                Buy it
+                                            </a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="item-buyBtn disabled">
+                                            <i class="fa-solid fa-lock"></i>
+                                            Locked
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else if (ViewBag.items != null && ViewBag.items.Count == 0)
+        {
+            <div class="blogsResult resultItemBox">
+                <h1 class="result-title">Items</h1>
+                <p class="noResultMessage">No result</p>
+            </div>
+        }
+    </div>
+</div>
