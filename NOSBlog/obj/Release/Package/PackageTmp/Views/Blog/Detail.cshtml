@@ -16,10 +16,10 @@
             </h2>
             <div class="blog-user">
                 <div class="row">
-                    <div class="col-xl-1">
+                    <div class="col-xl-1 col-3">
                         <a href="/User/Info?userId=@ViewBag.user.id" class="blog-userAvatar" style="background-image: url('/Uploads/@ViewBag.user.avatar')"></a>
                     </div>
-                    <div class="col-xl-11">
+                    <div class="col-xl-11 col-9">
                         <div class="blog-userInfo">
                             <a class="blog-userName" href="/User/Info?userId=@ViewBag.user.id">
                                 @ViewBag.user.last_name @ViewBag.user.first_name
@@ -86,10 +86,10 @@
                 {
                     <div class="blog-cmtItem" data-user-id="@cmtItem.user_id">
                         <div class="row">
-                            <div class="col-xl-3">
+                            <div class="col-xl-3 col-3">
                                 <a href="/User/Info?userId=@cmtItem.user_id" class="blog-userAvatar" style="background-image: url('/Uploads/@cmtItem.avatar')"></a>
                             </div>
-                            <div class="col-xl-9">
+                            <div class="col-xl-9 col-9">
                                 <div class="blog-userInfo">
                                     <a href="/User/Info?userId=@cmtItem.user_id" class="blog-userName">
                                         @cmtItem.fullname

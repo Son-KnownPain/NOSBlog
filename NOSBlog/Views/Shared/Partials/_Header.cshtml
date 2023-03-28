@@ -1,8 +1,11 @@
-﻿<div class="container">
+﻿@using NOSBlog.Auths 
+
+<div class="container">
     <div class="header--wrapper">
         <a class="header-logoLink" href="/">
             <img class="header--logo" src="~/Content/Images/Logo.png" alt="Logo" />
         </a>
+
         <nav class="header--nav">
             <a class="header--navItem" href="/">Home</a>
             <a class="header--navItem" href="/Item/Index">Items Shop</a>
@@ -10,6 +13,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </a>
         </nav>
+
         @if (Session["UserLogin"] == null)
         {
             <div class="header--userActions">
@@ -48,5 +52,77 @@
             </div>
         }
 
+        <div class="header--mobileMenuBtn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+
+    <div class="header--mobileMenuModal">
+        <div class="header--mobileMenuContainer">
+            <div class="mbMenu-closeBox">
+                <span class="mbMenu-closeBtn">
+                    <i class="fa-solid fa-xmark"></i>
+                </span>
+            </div>
+
+            <div class="mbMenu-content">
+                <div class="mbMenu-contentGroup">
+                    <h4 class="mbMenu-contentHeading">
+                        Web Navigation
+                    </h4>
+                    <a class="mbMenu-link" href="/">
+                        <i class="fa-solid fa-house"></i>
+                        Home
+                    </a>
+                    <a class="mbMenu-link" href="/item">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        Items Shop
+                    </a>
+                    <a class="mbMenu-link" href="/home/search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Search
+                    </a>
+                </div>
+
+                <div class="mbMenu-contentGroup">
+                    <h4 class="mbMenu-contentHeading">
+                        User Menu
+                    </h4>
+                    @if (UserLogin.IsUserLogin)
+                    {
+                        if (UserLogin.IsAdmin)
+                        {
+                            <a class="mbMenu-link" href="/admin">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                Administrator
+                            </a>
+                        }
+                        <a class="mbMenu-link" href="/blog/write">
+                            <i class="fa-regular fa-newspaper"></i>
+                            Write Blog
+                        </a>
+                        <a class="mbMenu-link" href="/user/profile">
+                            <i class="fa-solid fa-user"></i>
+                            Profile
+                        </a>
+                        <a class="mbMenu-link" href="/user/logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Logout
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="mbMenu-link" href="/user/login">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Login
+                        </a>
+                        <a class="mbMenu-link" href="/user/register">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Register
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </div>

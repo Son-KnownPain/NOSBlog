@@ -226,9 +226,9 @@ namespace NOSBlog.Controllers
             if (!UserLogin.IsUserLogin) return RedirectToAction("Login");
             int userId = UserLogin.GetUserLogin.id;
             NOSBlogEntities context = new NOSBlogEntities();
-            List<Int32> listItemId = context.user_item_collections.Where(x => x.user_id == userId).Select(x => x.item_id).ToList();
             List<UserItemViewModel> items = (from i in context.items
                                              join uic in context.user_item_collections on i.id equals uic.item_id
+                                             where uic.user_id == userId
                                              select new UserItemViewModel
                                              {
                                                  id = i.id,
@@ -249,10 +249,9 @@ namespace NOSBlog.Controllers
         {
             if (userId == null) return RedirectToAction(Request.UrlReferrer == null ? "/" : Request.UrlReferrer.ToString());
             NOSBlogEntities context = new NOSBlogEntities();
-            List<Int32> listItemId = context.user_item_collections.Where(x => x.user_id == userId).Select(x => x.item_id).ToList();
             List<UserItemViewModel> items = (from i in context.items
                                              join uic in context.user_item_collections on i.id equals uic.item_id
-                                             where listItemId.Contains(i.id)
+                                             where uic.user_id == userId
                                              select new UserItemViewModel
                                              {
                                                  id = i.id,
