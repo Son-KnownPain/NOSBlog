@@ -121,6 +121,33 @@ p.blog-postTime {
     margin-left: 12px;
 }
 
+.blog-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.blog-paginationBtn, .blog-pageNumber {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #333;
+    padding: 16px;
+}
+
+.blog-paginationBtn {
+    cursor: pointer;
+}
+
+.blog-paginationBtn.disabled {
+    opacity: .4;
+    pointer-events: none;
+}
+
+.blog-paginationBtn:hover {
+    color: var(--primary-color);
+}
+
 /* Left content - Subcontent */
 .subcontent {
     padding: 0 0 0 18px;

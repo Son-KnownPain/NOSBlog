@@ -1,6 +1,16 @@
 ﻿@using NOSBlog.Helpers;
 @{
     ViewBag.Title = "Home Page";
+
+    //Pagination
+    int currentPage = ViewBag.pagination["currentPage"];
+    int maxPage = ViewBag.pagination["maxPage"];
+
+    string isPrevDisabled = currentPage > 1 ? "" : "disabled";
+    string isNextDisabled = currentPage < maxPage ? "" : "disabled";
+
+    int prevPage = isPrevDisabled.Equals("disabled") ? 1 : currentPage - 1;
+    int nextPage = isNextDisabled.Equals("disabled") ? maxPage : currentPage + 1;
 }
 
 @section styles {
@@ -74,6 +84,20 @@
                         </div>
                     </div>
                 }
+
+                <div class="blog-pagination">
+                    <a href="/Home/Index?page=@prevPage" class="blog-paginationPrevBtn blog-paginationBtn @isPrevDisabled">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+
+                    <span class="blog-pageNumber">
+                        @currentPage
+                    </span>
+
+                    <a href="/Home/Index?page=@nextPage" class="blog-paginationNextBtn blog-paginationBtn @isNextDisabled">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
             </div>
 
             <div class="col-xl-3">

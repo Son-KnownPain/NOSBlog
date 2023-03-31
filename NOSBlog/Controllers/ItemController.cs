@@ -23,7 +23,11 @@ namespace NOSBlog.Controllers
         // GET: Item/Buy?itemId=int
         public ActionResult Buy(int? itemId)
         {
-            if (itemId == null || !UserLogin.IsUserLogin) return RedirectToAction("Index");
+            if (itemId == null || !UserLogin.IsUserLogin)
+            {
+                TempData["Error"] = "You must be login to buy it or item not found";
+                return RedirectToAction("Index");
+            }
             int userId = UserLogin.GetUserLogin.id;
 
             user buyer = context.users.FirstOrDefault(user => user.id == userId);

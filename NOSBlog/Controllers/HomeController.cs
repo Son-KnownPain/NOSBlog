@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using NOSBlog.Models;
 
 namespace NOSBlog.Controllers
 {
@@ -12,12 +11,15 @@ namespace NOSBlog.Controllers
     {
         NOSBlogEntities context = new NOSBlogEntities();
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            int currentPage = (page ?? 1) < 1 ? 1 : page ?? 1;
+            int perPage = 5;
+            int offsetNumber = (currentPage - 1 >= 0 ? currentPage - 1 : 0) * 5;
             NOSBlogEntities context = new NOSBlogEntities();
             List<BlogViewModel> listBlog = (from b in context.blogs
                                    join u in context.users on b.user_id equals u.id
-                                   orderby b.created_at descending
+                                   orderby b.id descending
                                    select new BlogViewModel
                                    {
                                        id = b.id,
@@ -33,7 +35,12 @@ namespace NOSBlog.Controllers
                                        fullname = u.last_name + " " + u.first_name,
                                        blue_tick = u.blue_tick,
                                        avatar = u.avatar,
-                                   }).Take(10).ToList();
+                                   }).Skip(offsetNumber).Take(perPage).ToList();
+            Dictionary<string, int> paginationInfo = new Dictionary<string, int>();
+            paginationInfo.Add("currentPage", currentPage);
+            int maxPage = (int) Math.Ceiling((decimal) context.blogs.Count() / perPage);
+            paginationInfo.Add("maxPage", maxPage);
+            ViewBag.pagination = paginationInfo;
             ViewBag.blogs = listBlog;
             // Top users
             List<user> listTopUsers = context.users.
