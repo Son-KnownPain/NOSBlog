@@ -14,7 +14,7 @@
             </a>
         </nav>
 
-        @if (Session["UserLogin"] == null)
+        @if (!UserLogin.IsUserLogin)
         {
             <div class="header--userActions">
                 <a class="header--actionItem" href="/user/login">
@@ -30,7 +30,7 @@
         else
         {
             <div class="header--userActions">
-                @if (NOSBlog.Auths.UserLogin.IsAdmin)
+                @if (UserLogin.IsAdmin)
                 {
                     <a class="header--actionItem" href="/admin">
                         <i class="fa-solid fa-screwdriver-wrench"></i>

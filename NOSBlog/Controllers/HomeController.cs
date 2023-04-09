@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NOSBlog.Filters;
 
 namespace NOSBlog.Controllers
 {
     public class HomeController : Controller
     {
         NOSBlogEntities context = new NOSBlogEntities();
-
         public ActionResult Index(int? page)
         {
             int currentPage = (page ?? 1) < 1 ? 1 : page ?? 1;

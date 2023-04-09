@@ -7,6 +7,7 @@ using NOSBlog.Models;
 using System.Web.Helpers;
 using NOSBlog.Auths;
 using System.Text.RegularExpressions;
+using NOSBlog.Filters;
 
 namespace NOSBlog.Controllers
 {
@@ -31,7 +32,7 @@ namespace NOSBlog.Controllers
                 user userLogin = context.users.FirstOrDefault(user => user.username == userData.username);
                 if (userLogin != null && Crypto.VerifyHashedPassword(userLogin.password, userData.password))
                 {
-                    Session["UserLogin"] = userLogin;
+                    AuthManager.Login(userLogin);
                     return Redirect("/User/Profile");
                 } else
                 {
@@ -84,43 +85,35 @@ namespace NOSBlog.Controllers
         }
 
         // GET /User/Logout
+        [UserAuthorization]
         public ActionResult Logout()
         {
-            Session.Remove("UserLogin");
+            AuthManager.Logout();
             return Redirect("/");
         }
 
         // GET /User/Profile
+        [UserAuthorization]
         public ActionResult Profile()
         {
-            if (!UserLogin.IsUserLogin)
-            {
-                return Redirect("/");
-            }
-            else
-            {
-                NOSBlogEntities context = new NOSBlogEntities();
-                int userId = UserLogin.GetUserLogin.id;
-                user userLogin = context.users.FirstOrDefault(user => user.id == userId);
-                if (userLogin == null) return RedirectToAction("Login");
-                List<blog> blogsOfUser = context.blogs.Where(blog => blog.user_id == userLogin.id).OrderByDescending(blog => blog.id).ToList();
-                ViewBag.user = userLogin;
-                ViewBag.blogs = blogsOfUser;
-                return View();
-            }
+            NOSBlogEntities context = new NOSBlogEntities();
+            int userId = AuthManager.User.GetUserLogin.id;
+            user userLogin = context.users.FirstOrDefault(user => user.id == userId);
+            if (userLogin == null) return RedirectToAction("Login");
+            List<blog> blogsOfUser = context.blogs.Where(blog => blog.user_id == userLogin.id).OrderByDescending(blog => blog.id).ToList();
+            ViewBag.user = userLogin;
+            ViewBag.blogs = blogsOfUser;
+            return View();
         }
 
         // POST /User/ChangeAvatar
         [HttpPost]
+        [UserAuthorization]
         public ActionResult ChangeAvatar(HttpPostedFileBase avatarFile)
         {
-            if (!UserLogin.IsUserLogin)
-            {
-                return Redirect("/");
-            }
             if (avatarFile != null && avatarFile.ContentLength > 0 && avatarFile.ContentLength <= 32000000)
             {
-                user userLogin = UserLogin.GetUserLogin;
+                user userLogin = AuthManager.User.GetUserLogin;
                 NOSBlogEntities context = new NOSBlogEntities();
                 user userToChangeAvt = context.users.FirstOrDefault(user => user.id == userLogin.id);
                 if (userToChangeAvt != null)
@@ -153,7 +146,7 @@ namespace NOSBlog.Controllers
                         System.IO.File.Delete(uploadFolderPath + '/' + oldFileName);
                     }
                 }
-                UserLogin.Update(userToChangeAvt);
+                AuthManager.User.Update(userToChangeAvt);
                 context.SaveChanges();
             }
 
@@ -162,14 +155,11 @@ namespace NOSBlog.Controllers
 
         // GET /User/LikedBlogs
         [HttpGet]
+        [UserAuthorization]
         public ActionResult LikedBlogs()
         {
-            if (!UserLogin.IsUserLogin)
-            {
-                return Redirect("/User/Login");
-            }
             NOSBlogEntities context = new NOSBlogEntities();
-            int userId = UserLogin.GetUserLogin.id;
+            int userId = AuthManager.User.GetUserLogin.id;
             List<Int32> listBlogId = context.user_like_blogs.Where(rd => rd.user_id == userId).Select(rd => rd.blog_id).ToList();
 
             List<blog> likedBlogs = context.blogs.Where(blog => listBlogId.Contains(blog.id)).ToList();
@@ -179,14 +169,11 @@ namespace NOSBlog.Controllers
 
         // GET /User/ChangeInfo
         [HttpGet]
+        [UserAuthorization]
         public ActionResult ChangeInfo()
         {
-            if (!UserLogin.IsUserLogin)
-            {
-                return Redirect("/User/Login");
-            }
             NOSBlogEntities context = new NOSBlogEntities();
-            int userId = UserLogin.GetUserLogin.id;
+            int userId = AuthManager.User.GetUserLogin.id;
             user userToUpdate = context.users.FirstOrDefault(u => u.id == userId);
             if (userToUpdate == null)
             {
@@ -197,6 +184,7 @@ namespace NOSBlog.Controllers
 
         // PUT /User/UpdateInfo
         [HttpPut]
+        [UserAuthorization]
         public ActionResult UpdateInfo(user userData)
         {
             if (!ModelState.IsValid)
@@ -215,16 +203,16 @@ namespace NOSBlog.Controllers
             userToUpdate.updated_at = DateTime.Now;
             context.SaveChanges();
 
-            UserLogin.Update(userToUpdate);
+            AuthManager.User.Update(userToUpdate);
             return Redirect("/User/Profile");
         }
 
         // GET /User/MyItems
         [HttpGet]
+        [UserAuthorization]
         public ActionResult MyItems()
         {
-            if (!UserLogin.IsUserLogin) return RedirectToAction("Login");
-            int userId = UserLogin.GetUserLogin.id;
+            int userId = AuthManager.User.GetUserLogin.id;
             NOSBlogEntities context = new NOSBlogEntities();
             List<UserItemViewModel> items = (from i in context.items
                                              join uic in context.user_item_collections on i.id equals uic.item_id
@@ -270,7 +258,7 @@ namespace NOSBlog.Controllers
         [HttpGet]
         public ActionResult Info(int? userId)
         {
-            if (UserLogin.IsUserLogin && userId == UserLogin.GetUserLogin.id) return RedirectToAction("Profile");
+            if (AuthManager.User.IsUserLogin && userId == AuthManager.User.GetUserLogin.id) return RedirectToAction("Profile");
             if (userId == null) return Redirect(Request.UrlReferrer == null ? "/" : Request.UrlReferrer.ToString());
             NOSBlogEntities context = new NOSBlogEntities();
             user userLogin = context.users.FirstOrDefault(user => user.id == userId);

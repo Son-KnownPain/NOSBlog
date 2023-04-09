@@ -11,9 +11,9 @@ namespace NOSBlog.Helpers
     {
         public static bool IsLikeComment(int commentId)
         {
-            if (UserLogin.IsUserLogin)
+            if (AuthManager.User.IsUserLogin)
             {
-                int userId = UserLogin.GetUserLogin.id;
+                int userId = AuthManager.User.GetUserLogin.id;
                 NOSBlogEntities context = new NOSBlogEntities();
                 user_like_comments recordChecking = context.user_like_comments.FirstOrDefault(
                         rd => rd.user_id == userId && rd.comment_id == commentId
@@ -33,9 +33,9 @@ namespace NOSBlog.Helpers
 
         public static bool IsYourComment(int commentId)
         {
-            if (UserLogin.IsUserLogin)
+            if (AuthManager.User.IsUserLogin)
             {
-                int userId = UserLogin.GetUserLogin.id;
+                int userId = AuthManager.User.GetUserLogin.id;
                 NOSBlogEntities context = new NOSBlogEntities();
                 comment commentChecking = context.comments.FirstOrDefault(cmt => cmt.id == commentId);
                 return (commentChecking != null && commentChecking.user_id == userId);

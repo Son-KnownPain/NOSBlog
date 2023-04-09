@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NOSBlog.Auths;
+using NOSBlog.Filters;
 using NOSBlog.Models;
 
 
 namespace NOSBlog.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class BlogController : Controller
     {
         NOSBlogEntities context = new NOSBlogEntities();
@@ -16,7 +18,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         // GET: Admin/Blog
         public ActionResult Index()
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             List<BlogViewModel> listBlog = (from b in context.blogs
                                             join u in context.users on b.user_id equals u.id
                                             orderby b.created_at descending
@@ -44,7 +45,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Delete(int? blogId)
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             if (blogId == null) return RedirectToAction("Index");
             blog blogToRemove = context.blogs.FirstOrDefault(blog => blog.id == blogId);
             if (blogToRemove == null) return RedirectToAction("Index");

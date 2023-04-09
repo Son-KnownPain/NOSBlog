@@ -1,4 +1,5 @@
 ﻿using NOSBlog.Auths;
+using NOSBlog.Filters;
 using NOSBlog.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace NOSBlog.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class CommentController : Controller
     {
         NOSBlogEntities context = new NOSBlogEntities();
@@ -15,7 +17,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         // GET: Admin/Comment
         public ActionResult Index()
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             ViewBag.comments = (from c in context.comments
                                 join u in context.users on c.user_id equals u.id
                                 orderby c.id descending
@@ -37,7 +38,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Delete(int? commentId)
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             comment commentToDelete = context.comments.FirstOrDefault(c => c.id == commentId);
             if (commentToDelete != null)
             {

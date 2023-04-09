@@ -6,10 +6,12 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using NOSBlog.Auths;
+using NOSBlog.Filters;
 using NOSBlog.Models;
 
 namespace NOSBlog.Areas.Admin.Controllers
 {
+    [AdminAuthorization]
     public class ItemController : Controller
     {
         private NOSBlogEntities context = new NOSBlogEntities();
@@ -17,7 +19,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         // GET: /admin/item
         public ActionResult Index()
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             List<item> listItem = context.items.ToList();
             ViewBag.items = listItem;
             return View();
@@ -26,7 +27,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         // GET: Admin/Item/Create
         public ActionResult Create()
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             return View();
         }
 
@@ -34,7 +34,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Store(item itemData, HttpPostedFileBase imageFile)
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             if (!ModelState.IsValid) return View("Create");
             if (itemData.reduce > itemData.price) return View("Create");
 
@@ -78,7 +77,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Delete(int? itemId)
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             if (itemId == null) return RedirectToAction("Index");
             item itemToDelete = context.items.FirstOrDefault(item => item.id == itemId);
             if (itemToDelete == null) return RedirectToAction("Index");
@@ -120,7 +118,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Lock(int? itemId)
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             if (itemId == null) return RedirectToAction("Index");
             item itemLock = context.items.FirstOrDefault(item => item.id == itemId);
             if (itemLock == null) return RedirectToAction("Index");
@@ -137,7 +134,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int? itemId)
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             if (itemId == null) return RedirectToAction("Index");
             item itemToEdit = context.items.FirstOrDefault(item => item.id == itemId);
             if (itemToEdit == null) return RedirectToAction("Index");
@@ -149,7 +145,6 @@ namespace NOSBlog.Areas.Admin.Controllers
         [HttpPut]
         public ActionResult Update(item itemData, HttpPostedFileBase imageFile)
         {
-            if (!UserLogin.IsAdmin) return Redirect("/");
             if (!ModelState.IsValid) return View("Edit");
 
             item itemUpdate = context.items.FirstOrDefault(item => item.id == itemData.id);

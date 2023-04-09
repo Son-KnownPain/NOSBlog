@@ -14,7 +14,7 @@ namespace NOSBlog.Controllers
         [HttpGet]
         public ActionResult Like(int? commentId)
         {
-            if (commentId == null || !UserLogin.IsUserLogin)
+            if (commentId == null || !AuthManager.User.IsUserLogin)
             {
                 return Json(
                     new
@@ -33,7 +33,7 @@ namespace NOSBlog.Controllers
             }
             NOSBlogEntities context = new NOSBlogEntities();
             comment commentLiked = context.comments.FirstOrDefault(comment => comment.id == commentId);
-            int userId = UserLogin.GetUserLogin.id;
+            int userId = AuthManager.User.GetUserLogin.id;
             user userLikeComment = context.users.FirstOrDefault(user => user.id == userId);
             if (commentLiked == null || userLikeComment == null)
             {
@@ -99,7 +99,7 @@ namespace NOSBlog.Controllers
         public ActionResult Unlike(int? commentId)
         {
             // Check if query param is null or unauthorize
-            if (commentId == null || !UserLogin.IsUserLogin)
+            if (commentId == null || !AuthManager.User.IsUserLogin)
             {
                 return Json(
                     new
@@ -118,7 +118,7 @@ namespace NOSBlog.Controllers
             }
             NOSBlogEntities context = new NOSBlogEntities();
             comment commentUnliked = context.comments.FirstOrDefault(cmt => cmt.id == commentId);
-            int userId = UserLogin.GetUserLogin.id;
+            int userId = AuthManager.User.GetUserLogin.id;
             user userUnlikeBlog = context.users.FirstOrDefault(user => user.id == userId);
             // Check if doesn't exist blog or user
             if (commentUnliked == null || userUnlikeBlog == null)
@@ -176,11 +176,11 @@ namespace NOSBlog.Controllers
         [HttpGet]
         public ActionResult Remove(int? commentId)
         {
-            if (commentId != null && UserLogin.IsUserLogin)
+            if (commentId != null && AuthManager.User.IsUserLogin)
             {
                 NOSBlogEntities context = new NOSBlogEntities();
                 comment commentToRemove = context.comments.FirstOrDefault(cmt => cmt.id == commentId);
-                if (commentToRemove == null || commentToRemove.user_id != UserLogin.GetUserLogin.id)
+                if (commentToRemove == null || commentToRemove.user_id != AuthManager.User.GetUserLogin.id)
                 {
                     return Redirect(Request.UrlReferrer.ToString());
                 }

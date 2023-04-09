@@ -11,10 +11,10 @@ namespace NOSBlog.Helpers
     {
         public static string IsLiked(int blogId)
         {
-            if (UserLogin.IsUserLogin)
+            if (AuthManager.User.IsUserLogin)
             {
                 NOSBlogEntities context = new NOSBlogEntities();
-                int userId = UserLogin.GetUserLogin.id;
+                int userId = AuthManager.User.GetUserLogin.id;
                 user_like_blogs recordChecking = context.user_like_blogs.FirstOrDefault(
                     rd => rd.user_id == userId && rd.blog_id == blogId
                 );

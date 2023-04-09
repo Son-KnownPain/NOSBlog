@@ -18,8 +18,8 @@ namespace NOSBlog.Helpers
         public static bool IsBought(int itemId)
         {
             NOSBlogEntities context = new NOSBlogEntities();
-            if (!UserLogin.IsUserLogin) return false;
-            int userId = UserLogin.GetUserLogin.id;
+            if (!AuthManager.User.IsUserLogin) return false;
+            int userId = AuthManager.User.GetUserLogin.id;
 
             user buyer = context.users.FirstOrDefault(user => user.id == userId);
             item itemSell = context.items.FirstOrDefault(item => item.id == itemId);
